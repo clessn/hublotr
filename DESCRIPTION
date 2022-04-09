@@ -1,0 +1,19 @@
+Package: hubr
+Type: Package
+Title: Package d'accès à clHub
+Version: 2.0.7
+Author: Olivier Banville <oli.banville@gmail.com>
+Maintainer: Olivier Banville <oli.banville@gmail.com>
+Description: Package d'accès à clHub
+License:
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
+Imports: httr,
+    data.table,
+    rjson,
+    getPass,
+    sqldf,
+    readr,
+    dplyr,
+    jsonlite
