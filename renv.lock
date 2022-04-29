@@ -1,0 +1,95 @@
+{
+  "R": {
+    "Version": "3.6.3",
+    "Repositories": [
+      {
+        "Name": "CRAN",
+        "URL": "https://cloud.r-project.org"
+      }
+    ]
+  },
+  "Packages": {
+    "R6": {
+      "Package": "R6",
+      "Version": "2.5.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "470851b6d5d0ac559e9d01bb352b4021",
+      "Requirements": []
+    },
+    "askpass": {
+      "Package": "askpass",
+      "Version": "1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e8a22846fff485f0be3770c2da758713",
+      "Requirements": [
+        "sys"
+      ]
+    },
+    "curl": {
+      "Package": "curl",
+      "Version": "4.3.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "022c42d49c28e95d69ca60446dbabf88",
+      "Requirements": []
+    },
+    "httr": {
+      "Package": "httr",
+      "Version": "1.4.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a525aba14184fec243f9eaec62fbed43",
+      "Requirements": [
+        "R6",
+        "curl",
+        "jsonlite",
+        "mime",
+        "openssl"
+      ]
+    },
+    "jsonlite": {
+      "Package": "jsonlite",
+      "Version": "1.8.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "d07e729b27b372429d42d24d503613a0",
+      "Requirements": []
+    },
+    "mime": {
+      "Package": "mime",
+      "Version": "0.12",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "18e9c28c1d3ca1560ce30658b22ce104",
+      "Requirements": []
+    },
+    "openssl": {
+      "Package": "openssl",
+      "Version": "2.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "cf4329aac12c2c44089974559c18e446",
+      "Requirements": [
+        "askpass"
+      ]
+    },
+    "renv": {
+      "Package": "renv",
+      "Version": "0.15.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c1078316e1d4f70275fc1ea60c0bc431",
+      "Requirements": []
+    },
+    "sys": {
+      "Package": "sys",
+      "Version": "3.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b227d13e29222b4574486cfcbde077fa",
+      "Requirements": []
+    }
+  }
+}
