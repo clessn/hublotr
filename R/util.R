@@ -122,7 +122,7 @@ patch <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
 }
 
 #' @export
-options <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
+options <- function(path, credentials = NULL, verify = T, timeout = 30) {
     if (is.null(credentials)) {
         # ignore credentials completely
         path <- paste0(path)
@@ -138,7 +138,6 @@ options <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
     response <- httr::VERB(
         "OPTIONS",
         url = path,
-        body = body,
         config = config, verify = verify, httr::timeout(timeout)
     )
     return(response)
