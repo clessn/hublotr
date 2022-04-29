@@ -1,22 +1,22 @@
 # authentication
+#' @export
 get_credentials <- function(hub_url, username = NULL, password = NULL) {
     if (username == "" || is.null(username)) {
-        username <- askpass::askpass("username")
+        username <- getPass::getPass("username: ")
     }
 
     if (password == "" || is.null(password)) {
-        password <- askpass::askpass("password")
+        password <- getPass::getPass("password: ")
     }
 
-    return(list(
+    return(base::list(
         hub_url = hub_url,
         prefix = "Basic",
-        auth <-
-            openssl::base64_encode(paste(username, ":", password, sep = "")),
-        sep = " "
+        auth = openssl::base64_encode(paste(username, ":", password, sep = ""))
     ))
 }
 
+#' @export
 get_empty_credentials <- function(hub_url) {
     return(list(
         hub_url = hub_url,
@@ -26,6 +26,7 @@ get_empty_credentials <- function(hub_url) {
 }
 
 # simple verbs
+#' @export
 get <- function(path, options = NULL, credentials = NULL, verify = T, timeout = 30) {
     # build query paramters
     if (!is.null(options)) {
@@ -43,6 +44,7 @@ get <- function(path, options = NULL, credentials = NULL, verify = T, timeout = 
         path <- paste0(credentials$hub_url, path, params)
     } else {
         # add authentication
+        path <- paste0(credentials$hub_url, path, params)
         config <- httr::add_headers(Authorization = paste(credentials$prefix, credentials$auth))
     }
 
@@ -53,6 +55,7 @@ get <- function(path, options = NULL, credentials = NULL, verify = T, timeout = 
     return(response)
 }
 
+#' @export
 post <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
     if (is.null(credentials)) {
         # ignore credentials completely
@@ -62,6 +65,7 @@ post <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
         path <- paste0(credentials$hub_url, path)
     } else {
         # add authentication
+        path <- paste0(credentials$hub_url, path)
         config <- httr::add_headers(Authorization = paste(credentials$prefix, credentials$auth))
     }
 
@@ -73,6 +77,7 @@ post <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
     return(response)
 }
 
+#' @export
 delete <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
     if (is.null(credentials)) {
         # ignore credentials completely
@@ -82,6 +87,7 @@ delete <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
         path <- paste0(credentials$hub_url, path)
     } else {
         # add authentication
+        path <- paste0(credentials$hub_url, path)
         config <- httr::add_headers(Authorization = paste(credentials$prefix, credentials$auth))
     }
 
@@ -93,6 +99,7 @@ delete <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
     return(response)
 }
 
+#' @export
 patch <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
     if (is.null(credentials)) {
         # ignore credentials completely
@@ -102,6 +109,7 @@ patch <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
         path <- paste0(credentials$hub_url, path)
     } else {
         # add authentication
+        path <- paste0(credentials$hub_url, path)
         config <- httr::add_headers(Authorization = paste(credentials$prefix, credentials$auth))
     }
 
@@ -113,6 +121,7 @@ patch <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
     return(response)
 }
 
+#' @export
 options <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
     if (is.null(credentials)) {
         # ignore credentials completely
@@ -122,6 +131,7 @@ options <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
         path <- paste0(credentials$hub_url, path)
     } else {
         # add authentication
+        path <- paste0(credentials$hub_url, path)
         config <- httr::add_headers(Authorization = paste(credentials$prefix, credentials$auth))
     }
 
@@ -136,10 +146,35 @@ options <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
 
 
 # complex verbs
+#' @export
 list <- function() {}
 
+#' @export
 create <- function() {}
 
+#' @export
 retrieve <- function() {}
 
+#' @export
 update <- function() {}
+
+
+# error handling
+handle_response <- function(response, path, expected) {
+    if (response$status == 500) {
+        stop(paste("error 500 (server-side error) at", path, ":", httr::content(response)))
+    } else if (response$status == 404) {
+        stop(paste("error 404 (item does not exist) at", path))
+    } else if (response$status == 400) {
+        stop(paste("error 400 (body possibly malformed) at", path, ":", httr::content(response)))
+    } else if (response$status == 401) {
+        stop(paste("error 401 (wrong credentials) at", path, ":", httr::content(response)))
+    } else if (response$status == 403) {
+        stop(paste("error 403 (wrong credentials or action not allowed) at", path, ":", httr::content(response)))
+    }
+
+    if (response$status != expected) {
+        stop(paste("error", response$status, "at", path, ":", httr::content(response)))
+    }
+    return(httr::content(response))
+}
