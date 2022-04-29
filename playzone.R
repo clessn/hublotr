@@ -1,3 +1,5 @@
+devtools::install_github("clessn/hubr")
+
 # enter credentials
 credentials <- hubr::get_credentials("https://clhub.dev.clessn.cloud/")
 
@@ -24,8 +26,9 @@ result <- hubr::add_warehouse_item(warehouse_table,
 # list tems
 # items are paginated in pages of 1000
 warehouse_data_page1 <- hubr::list_warehouse_items(warehouse_table, credentials)
+warehouse_data_page2 <- hubr::list_next(warehouse_data_page1, credentials)
+warehouse_data_page3 <- hubr::list_next(warehouse_data_page2, credentials)
 
-# if the "next" attribute is not null, then it contains a link to the next page of data
-if (!.isnull(warehouse_data_page1$"next")) {
-    warehouse_data_page2 <- hubr::list_warehouse_items(warehouse_table, credentials, warehouse_data_page1$"next")
-}
+length(warehouse_data_page1)
+length(warehouse_data_page2)
+length(warehouse_data_page3)

@@ -40,7 +40,7 @@ update_mart_item <- function(mart_table, id, body, credentials) {
     stop("not implemented")
 }
 #' @export
-delete_mart_item <- function(mart_table, id, credentials) {
+remove_mart_item <- function(mart_table, id, credentials) {
     stop("not implemented")
 }
 
@@ -49,48 +49,33 @@ delete_mart_item <- function(mart_table, id, credentials) {
 #' @export
 list_warehouses <- function(credentials) {
     path <- "api/v1/warehouses/"
-    response <- hubr::get(path, credentials = credentials)
-    result <- hubr::handle_response(response, path, 200)
-    return(result)
+    return(hubr::list(path, credentials))
 }
 #' @export
 list_warehouse_items <- function(warehouse_table, credentials, cursor = NULL) {
     path <- paste0("api/v1/", warehouse_table, "/")
-    if (!is.null(cursor))
-    {
-        path <- paste0(path, "?", cursor)
-    }
-    response <- hubr::get(path, credentials = credentials)
-    result <- hubr::handle_response(response, path, 200)
-
-    if (!is.null(result$"next")) {
-        result$"next" <- strsplit(result$"next", "?", fixed=T)[[1]][[2]]
-    }
-    if (!is.null(result$"previous")) {
-        result$"previous" <- strsplit(result$"previous", "?", fixed=T)[[1]][[2]]
-    }
-
-    return(result)
+    return(hubr::list_paginated(path, credentials, cursor))
 }
 
 #' @export
 add_warehouse_item <- function(warehouse_table, body, credentials) {
     path <- paste0("api/v1/", warehouse_table, "/")
-    response <- hubr::post(path, body = body, credentials = credentials)
-    result <- hubr::handle_response(response, path, 201)
-    return(result)
+    return(hubr::create(path, body, credentials))
 }
 #' @export
 retrieve_warehouse_item <- function(warehouse_table, id, credentials) {
-    stop("not implemented")
+    path <- paste0("api/v1/", warehouse_table, "/", id, "/")
+    return(hubr::retrieve(path, credentials))
 }
 #' @export
 update_warehouse_item <- function(warehouse_table, id, body, credentials) {
-    stop("not implemented")
+    path <- paste0("api/v1/", warehouse_table, "/", id, "/")
+    return(hubr::update(path, body, credentials))
 }
 #' @export
-delete_warehouse_item <- function(warehouse_table, id, credentials) {
-    stop("not implemented")
+remove_warehouse_item <- function(warehouse_table, id, credentials) {
+    path <- paste0("api/v1/", warehouse_table, "/", id, "/")
+    return(hubr::remove(path, credentials))
 }
 
 # lake
@@ -112,7 +97,7 @@ update_lake_item <- function(id, body, credentials) {
     stop("not implemented")
 }
 #' @export
-delete_lake_item <- function(id, credentials) {
+remove_lake_item <- function(id, credentials) {
     stop("not implemented")
 }
 
@@ -135,7 +120,7 @@ update_tag <- function(id, body, credentials) {
     stop("not implemented")
 }
 #' @export
-delete_tag <- function(id, credentials) {
+remove_tag <- function(id, credentials) {
     stop("not implemented")
 }
 
@@ -158,6 +143,6 @@ update_file <- function(id, body, credentials) {
     stop("not implemented")
 }
 #' @export
-delete_file <- function(id, credentials) {
+remove_file <- function(id, credentials) {
     stop("not implemented")
 }

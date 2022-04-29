@@ -147,16 +147,76 @@ options <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
 
 # complex verbs
 #' @export
-list <- function() {}
+list <- function(path, credentials) {
+    response <- hubr::get(path, credentials = credentials)
+    result <- hubr::handle_response(response, path, 200)
+    return(result)
+}
 
 #' @export
-create <- function() {}
+list_paginated <- function(path, credentials, cursor = NULL) {
+    orig_path <- path
+    if (!is.null(cursor)) {
+        path <- paste0(path, "?", cursor)
+    }
+    response <- hubr::get(path, credentials = credentials)
+    result <- hubr::handle_response(response, path, 200)
+    result$path <- orig_path
+
+    if (!is.null(result$"next")) {
+        result$"next" <- strsplit(result$"next", "?", fixed = T)[[1]][[2]]
+    }
+    if (!is.null(result$"previous")) {
+        result$"previous" <- strsplit(result$"previous", "?", fixed = T)[[1]][[2]]
+    }
+    return(result)
+}
 
 #' @export
-retrieve <- function() {}
+list_next <- function(last_result, credentials) {
+    if (!is.null(last_result$"next")) {
+        return(hubr::list_paginated(last_result$path, credentials, last_result$"next"))
+    } else {
+        return(NULL)
+    }
+}
 
 #' @export
-update <- function() {}
+list_previous <- function(last_result, credentials) {
+    if (!is.null(last_result$"previous")) {
+        return(hubr::list_paginated(last_result$path, credentials, last_result$"previous"))
+    } else {
+        return(NULL)
+    }
+}
+
+#' @export
+create <- function(path, body, credentials) {
+    response <- hubr::post(path, body = body, credentials = credentials)
+    result <- hubr::handle_response(response, path, 201)
+    return(result)
+}
+
+#' @export
+retrieve <- function(path, id, credentials) {
+    response <- hubr::get(path, credentials = credentials)
+    result <- hubr::handle_response(response, path, 200)
+    return(result)
+}
+
+#' @export
+update <- function(path, id, body, credentials) {
+    response <- hubr::patch(path, body = body, credentials = credentials)
+    result <- hubr::handle_response(response, path, 200)
+    return(result)
+}
+
+#' @export
+remove <- function(path, id, credentials) {
+    response <- hubr::delete(path, credentials = credentials)
+    result <- hubr::handle_response(response, path, 204)
+    return(result)
+}
 
 
 # error handling
