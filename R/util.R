@@ -18,7 +18,7 @@ get_credentials <- function(hub_url, username = NULL, password = NULL) {
 
 #' @export
 get_empty_credentials <- function(hub_url) {
-    return(list(
+    return(base::list(
         hub_url = hub_url,
         prefix = NULL,
         auth = NULL
