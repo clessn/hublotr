@@ -21,29 +21,6 @@ retrieve_journal <- function(id, credentials) {
     stop("not implemented")
 }
 
-# marts
-
-#' @export
-list_marts <- function(credentials) {
-    stop("not implemented")
-}
-#' @export
-add_mart_item <- function(mart_table, body, credentials) {
-    stop("not implemented")
-}
-#' @export
-retrieve_mart_item <- function(mart_table, id, credentials) {
-    stop("not implemented")
-}
-#' @export
-update_mart_item <- function(mart_table, id, body, credentials) {
-    stop("not implemented")
-}
-#' @export
-remove_mart_item <- function(mart_table, id, credentials) {
-    stop("not implemented")
-}
-
 # warehouses
 
 #' @export
@@ -75,6 +52,34 @@ update_warehouse_item <- function(warehouse_table, id, body, credentials) {
 #' @export
 remove_warehouse_item <- function(warehouse_table, id, credentials) {
     path <- paste0("api/v1/", warehouse_table, "/", id, "/")
+    return(hubr::remove(path, credentials))
+}
+
+# marts
+
+#' @export
+list_marts <- function(credentials) {
+    path <- "api/v1/marts/"
+    return(hubr::list(path, credentials))
+}
+#' @export
+add_mart_item <- function(mart_table, body, credentials) {
+    path <- paste0("api/v1/", mart_table, "/")
+    return(hubr::create(path, body, credentials))
+}
+#' @export
+retrieve_mart_item <- function(mart_table, id, credentials) {
+    path <- paste0("api/v1/", mart_table, "/", id, "/")
+    return(hubr::retrieve(path, credentials))
+}
+#' @export
+update_mart_item <- function(mart_table, id, body, credentials) {
+    path <- paste0("api/v1/", mart_table, "/", id, "/")
+    return(hubr::update(path, body, credentials))
+}
+#' @export
+remove_mart_item <- function(mart_table, id, credentials) {
+    path <- paste0("api/v1/", mart_table, "/", id, "/")
     return(hubr::remove(path, credentials))
 }
 
