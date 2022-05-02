@@ -10,7 +10,6 @@ warehouses <- tidyjson::spread_all(warehouse_tables)
 # select a warehouse table
 table_name <- warehouses$db_table[[1]]
 
-
 # add a new item
 key <- paste(sample(LETTERS, 32, TRUE), collapse = "")
 result <- hubr::add_warehouse_item(table_name,
@@ -24,16 +23,18 @@ result <- hubr::add_warehouse_item(table_name,
     credentials
 )
 
-# list tems
-# items are paginated in pages of 1000
-warehouse_data_page1 <- hubr::list_warehouse_items(table_name, credentials)
-warehouse_data_page2 <- hubr::list_next(warehouse_data_page1, credentials)
-warehouse_data_page3 <- hubr::list_next(warehouse_data_page2, credentials)
-
-length(warehouse_data_page1)
-length(warehouse_data_page2)
-length(warehouse_data_page3)
-
-
-# to dataframe
-df <- tidyjson::spread_all(warehouse_data_page1$results)
+# filter items
+filter <- list(
+    key__contains = "A"
+)
+count <- hubr::count_warehouse_items(table_name, credentials, filter)[[1]]
+page <- hubr::filter_warehouse_items(table_name, credentials, filter)
+data <- page$results
+while (!is.null(data$"next")) {
+    page <- hubr::filter_next(page, credentials)
+    if (is.null(page)) {
+        break
+    }
+    data <- c(data, page$results)
+}
+df <- tidyjson::spread_all(data)

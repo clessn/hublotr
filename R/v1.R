@@ -33,6 +33,16 @@ list_warehouse_items <- function(warehouse_table, credentials, cursor = NULL) {
     path <- paste0("api/v1/", warehouse_table, "/")
     return(hubr::list_paginated(path, credentials, cursor))
 }
+#' @export
+filter_warehouse_items <- function(warehouse_table, credentials, filter) {
+    path <- paste0("api/v1/", warehouse_table, "/")
+    return(hubr::filter(path, filter, credentials))
+}
+#' @export
+count_warehouse_items <- function(warehouse_table, credentials, filter = NULL) {
+    path <- paste0("api/v1/", warehouse_table, "/")
+    return(hubr::count(path, filter, credentials))
+}
 
 #' @export
 add_warehouse_item <- function(warehouse_table, body, credentials) {
@@ -67,6 +77,17 @@ add_mart_item <- function(mart_table, body, credentials) {
     path <- paste0("api/v1/", mart_table, "/")
     return(hubr::create(path, body, credentials))
 }
+#' @export
+filter_mart_items <- function(mart_table, credentials, filter) {
+    path <- paste0("api/v1/", mart_table, "/")
+    return(hubr::filter(path, filter, credentials))
+}
+#' @export
+count_mart_items <- function(mart_table, credentials, filter = NULL) {
+    path <- paste0("api/v1/", mart_table, "/")
+    return(hubr::count(path, filter, credentials))
+}
+
 #' @export
 retrieve_mart_item <- function(mart_table, id, credentials) {
     path <- paste0("api/v1/", mart_table, "/", id, "/")

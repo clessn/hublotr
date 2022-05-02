@@ -28,7 +28,7 @@ get_empty_credentials <- function(hub_url) {
 # simple verbs
 #' @export
 get <- function(path, options = NULL, credentials = NULL, verify = T, timeout = 30) {
-    # build query paramters
+    config <- NULL
     if (!is.null(options)) {
         params <- paste(names(options), options, sep = "=", collapse = "&")
         params <- paste0("?", params)
@@ -57,6 +57,7 @@ get <- function(path, options = NULL, credentials = NULL, verify = T, timeout = 
 
 #' @export
 post <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
+    config <- NULL
     if (is.null(credentials)) {
         # ignore credentials completely
         path <- paste0(path)
@@ -71,7 +72,8 @@ post <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
 
     response <- httr::POST(
         url = path,
-        body = body,
+        body = jsonlite::toJSON(body, auto_unbox = T),
+        httr::content_type_json(),
         config = config, verify = verify, httr::timeout(timeout)
     )
     return(response)
@@ -79,6 +81,7 @@ post <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
 
 #' @export
 delete <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
+    config <- NULL
     if (is.null(credentials)) {
         # ignore credentials completely
         path <- paste0(path)
@@ -189,6 +192,7 @@ list_previous <- function(last_result, credentials) {
     }
 }
 
+
 #' @export
 create <- function(path, body, credentials) {
     response <- hubr::post(path, body = body, credentials = credentials)
@@ -214,6 +218,54 @@ update <- function(path, id, body, credentials) {
 remove <- function(path, id, credentials) {
     response <- hubr::delete(path, credentials = credentials)
     result <- hubr::handle_response(response, path, 204)
+    return(result)
+}
+
+#' only applies to dynamic table objects
+#' @export
+filter <- function(path, body, credentials, cursor = NULL) {
+    orig_path <- path
+    path <- paste0(path, "filter/")
+    if (!is.null(cursor)) {
+        path <- paste0(path, "?", cursor)
+    }
+    response <- hubr::post(path, body, credentials = credentials)
+    result <- hubr::handle_response(response, path, 200)
+    result$path <- orig_path
+
+    if (!is.null(result$"next")) {
+        result$"next" <- strsplit(result$"next", "?", fixed = T)[[1]][[2]]
+    }
+    if (!is.null(result$"previous")) {
+        result$"previous" <- strsplit(result$"previous", "?", fixed = T)[[1]][[2]]
+    }
+    return(result)
+}
+
+filter_next <- function(last_result, credentials) {
+    if (!is.null(last_result$"next")) {
+        return(hubr::filter(last_result$path, last_result$body, credentials, last_result$"next"))
+    } else {
+        return(NULL)
+    }
+}
+
+filter_previous <- function(last_result, credentials) {
+    if (!is.null(last_result$"previous")) {
+        return(hubr::filter(last_result$path, last_result$body, credentials, last_result$"previous"))
+    } else {
+        return(NULL)
+    }
+}
+
+count <- function(path, filter, credentials) {
+    path <- paste0(path, "count/")
+    if (is.null(filter)) {
+        response <- hubr::get(path, credentials = credentials)
+    } else {
+        response <- hubr::post(path, body = filter, credentials = credentials)
+    }
+    result <- hubr::handle_response(response, path, 200)
     return(result)
 }
 
