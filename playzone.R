@@ -1,7 +1,7 @@
 devtools::install_github("clessn/hubr")
 
 # validate you have the latest version
-check_version()
+hubr::check_version()
 
 # enter credentials
 credentials <- hubr::get_credentials("https://clhub.dev.clessn.cloud/")
