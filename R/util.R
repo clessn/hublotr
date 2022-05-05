@@ -290,3 +290,31 @@ handle_response <- function(response, path, expected) {
     }
     return(httr::content(response))
 }
+
+
+#' @export
+check_version <- function(warn_only = F) {
+    current_version <- packageVersion("hubr")
+    online_version = NULL
+    tryCatch(
+        {
+            online_version <- stringr::str_split(readr::read_lines("https://raw.githubusercontent.com/clessn/hubr/master/DESCRIPTION")[[4]], ": ")[[1]][[2]]
+        }
+        ,
+        error = function(e) {
+            warning("could not check for updates")
+        }
+    )
+
+    online_version <- stringr::str_split(readr::read_lines("https://raw.githubusercontent.com/clessn/hubr/master/DESCRIPTION")[[4]], ": ")[[1]][[2]]
+
+    if (current_version != online_version) {
+        if (warn_only) {
+            warning(paste0("hubr version ", current_version, " is outdated (v", online_version, " available)!"))
+        } else {
+            stop(paste0("hubr version ", current_version, " is outdated (v", online_version, " available)!"))
+        }
+    } else {
+        print(paste0("hubr version ", current_version, " is up to date."))
+    }
+}
