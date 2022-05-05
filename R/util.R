@@ -232,6 +232,7 @@ filter <- function(path, body, credentials, cursor = NULL) {
     response <- hubr::post(path, body, credentials = credentials)
     result <- hubr::handle_response(response, path, 200)
     result$path <- orig_path
+    result$filter <- body
 
     if (!is.null(result$"next")) {
         result$"next" <- strsplit(result$"next", "?", fixed = T)[[1]][[2]]
@@ -244,7 +245,7 @@ filter <- function(path, body, credentials, cursor = NULL) {
 
 filter_next <- function(last_result, credentials) {
     if (!is.null(last_result$"next")) {
-        return(hubr::filter(last_result$path, last_result$body, credentials, last_result$"next"))
+        return(hubr::filter(last_result$path, last_result$filter, credentials, last_result$"next"))
     } else {
         return(NULL)
     }
@@ -252,7 +253,7 @@ filter_next <- function(last_result, credentials) {
 
 filter_previous <- function(last_result, credentials) {
     if (!is.null(last_result$"previous")) {
-        return(hubr::filter(last_result$path, last_result$body, credentials, last_result$"previous"))
+        return(hubr::filter(last_result$path, last_result$filter, credentials, last_result$"previous"))
     } else {
         return(NULL)
     }
