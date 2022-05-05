@@ -38,13 +38,13 @@ filter <- list(
 )
 count <- hubr::count_warehouse_items(table_name, credentials, filter)[[1]]
 page <- hubr::filter_warehouse_items(table_name, credentials, filter)
-data <- page$results
-while (!is.null(page$"next")) {
+data <- list() # on crée une liste vide pour contenir les données
+repeat {
+    data <- c(data, page$results)
     page <- hubr::filter_next(page, credentials)
     if (is.null(page)) {
         break
     }
-    data <- c(data, page$results)
 }
 df <- tidyjson::spread_all(data)
 
