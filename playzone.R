@@ -5,16 +5,25 @@ hubr::check_version()
 
 # enter credentials
 credentials <- hubr::get_credentials("https://clhub.clessn.cloud/")
-# credentials <- hubr::get_credentials("http://localhost:8080/")
+credentials <- hubr::get_credentials("http://localhost:8080/")
 
 # list all tables
 tables <- tidyjson::spread_all(hubr::list_tables(credentials))
 
-# select a warehouse table
+# select a table
 table_name <- tables$db_table[[1]]
 
 # log information to the hub
 hubr::log(app_id, "info", "Starting...", credentials)
+hubr::log(app_id, "debug", "test123", credentials)
+hubr::log(app_id, "warning", "this might be a problem later", credentials)
+hubr::log(app_id, "error", "something went wrong", credentials)
+hubr::log(app_id, "critical", "something went terribly wrong", credentials)
+hubr::log(app_id, "success", "good! everything worked!", credentials)
+
+tidyjson::spread_all(
+    hubr::filter_logs(credentials, filter = list(application = "test"))$results
+)
 
 # add a new item
 for (i in 1:2000) {

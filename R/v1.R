@@ -2,7 +2,7 @@
 
 #' @export
 log <- function(app_id, level, message, credentials) {
-    url <- paste0("/logs/", app_id, "/")
+    url <- paste0("api/v1/log/", app_id, "/")
     hubr::create(url, list(level = level, message = message), credentials)
     if (level == "error" || level == "critical") {
         stop(message)
@@ -21,19 +21,31 @@ log <- function(app_id, level, message, credentials) {
 
 #' @export
 list_logs <- function(credentials) {
-    stop("not implemented")
+    path <- "api/v1/logs/"
+    return(hubr::list_(path, credentials))
+}
+filter_logs <- function(credentials, filter) {
+    path <- "api/v1/logs/"
+    return(hubr::filter(path, filter, credentials))
 }
 #' @export
 retrieve_log <- function(id, credentials) {
-    stop("not implemented")
+    path <- paste0("api/v1/", id, "/")
+    return(hubr::retrieve(path, credentials))
 }
 #' @export
 list_journals <- function(credentials) {
-    stop("not implemented")
+    path <- "api/v1/journals/"
+    return(hubr::list_(path, credentials))
+}
+filter_journals <- function(credentials, filter) {
+    path <- "api/v1/journals/"
+    return(hubr::filter(path, filter, credentials))
 }
 #' @export
 retrieve_journal <- function(id, credentials) {
-    stop("not implemented")
+    path <- paste0("api/v1/", id, "/")
+    return(hubr::retrieve(path, credentials))
 }
 
 # tables
@@ -87,6 +99,10 @@ list_lake_items <- function(credentials) {
     stop("not implemented")
 }
 #' @export
+filter_lake_items <- function(credentials, filter) {
+    stop("not implemented")
+}
+#' @export
 retrieve_lake_item <- function(id, credentials) {
     stop("not implemented")
 }
@@ -110,6 +126,10 @@ list_tags <- function(credentials) {
     stop("not implemented")
 }
 #' @export
+filter_tags <- function(credentials, filter) {
+    stop("not implemented")
+}
+#' @export
 retrieve_tag <- function(id, credentials) {
     stop("not implemented")
 }
@@ -130,6 +150,10 @@ remove_tag <- function(id, credentials) {
 
 #' @export
 list_files <- function(credentials) {
+    stop("not implemented")
+}
+#' @export
+filter_files <- function(credentials, filter) {
     stop("not implemented")
 }
 #' @export
