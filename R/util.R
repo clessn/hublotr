@@ -80,6 +80,30 @@ post <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
 }
 
 #' @export
+form_post <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
+    config <- NULL
+    if (is.null(credentials)) {
+        # ignore credentials completely
+        path <- paste0(path)
+    } else if (is.null(credentials$auth)) {
+        # continue without authentication
+        path <- paste0(credentials$hub_url, path)
+    } else {
+        # add authentication
+        path <- paste0(credentials$hub_url, path)
+        config <- httr::add_headers(Authorization = paste(credentials$prefix, credentials$auth))
+    }
+
+    response <- httr::POST(
+        url = path,
+        body = body,
+        httr::content_type("multipart/form-data"),
+        config = config, verify = verify, httr::timeout(timeout)
+    )
+    return(response)
+}
+
+#' @export
 delete <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
     config <- NULL
     if (is.null(credentials)) {
@@ -196,6 +220,13 @@ list_previous <- function(last_result, credentials) {
 #' @export
 create <- function(path, body, credentials) {
     response <- hubr::post(path, body = body, credentials = credentials)
+    result <- hubr::handle_response(response, path, 201)
+    return(result)
+}
+
+#' @export
+form_create <- function(path, body, credentials) {
+    response <- hubr::form_post(path, body = body, credentials = credentials)
     result <- hubr::handle_response(response, path, 201)
     return(result)
 }

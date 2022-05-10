@@ -96,27 +96,33 @@ remove_table_item <- function(table_name, id, credentials) {
 
 #' @export
 list_lake_items <- function(credentials) {
-    stop("not implemented")
+    path <- "api/v1/lake/"
+    return(hubr::list_(path, credentials))
 }
 #' @export
 filter_lake_items <- function(credentials, filter) {
-    stop("not implemented")
+    path <- "api/v1/lake/"
+    return(hubr::filter(path, filter, credentials))
 }
 #' @export
 retrieve_lake_item <- function(id, credentials) {
-    stop("not implemented")
+    path <- paste0("api/v1/lake/", id, "/")
+    return(hubr::retrieve(path, credentials))
 }
 #' @export
-add_lake_item <- function(id, body, credentials) {
-    stop("not implemented")
+add_lake_item <- function(body, credentials) {
+    path <- "api/v1/lake/"
+    return(hubr::form_create(path, body, credentials))
 }
 #' @export
 update_lake_item <- function(id, body, credentials) {
-    stop("not implemented")
+    path <- paste0("api/v1/lake/", id, "/")
+    return(hubr::update(path, body, credentials))
 }
 #' @export
 remove_lake_item <- function(id, credentials) {
-    stop("not implemented")
+    path <- paste0("api/v1/lake/", id, "/")
+    return(hubr::remove(path, credentials))
 }
 
 # tags

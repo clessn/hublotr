@@ -55,3 +55,13 @@ repeat {
     }
 }
 df <- tidyjson::spread_all(data)
+
+
+# to upload a file, endpoints work a bit differently.
+# you need to convert the json yourself (in this example, the metadata)
+hubr::add_lake_item(body = list(
+    key = "mylakeitem",
+    path = "test/items",
+    file = httr::upload_file("test_upload.txt"),
+    metadata = jsonlite::toJSON(list(type = "text"), auto_unbox = T)
+), credentials)
