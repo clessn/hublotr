@@ -149,7 +149,7 @@ options <- function(path, credentials = NULL, verify = T, timeout = 30) {
 
 # complex verbs
 #' @export
-list <- function(path, credentials) {
+list_ <- function(path, credentials) {
     response <- hubr::get(path, credentials = credentials)
     result <- hubr::handle_response(response, path, 200)
     return(result)
@@ -243,6 +243,7 @@ filter <- function(path, body, credentials, cursor = NULL) {
     return(result)
 }
 
+#' @export
 filter_next <- function(last_result, credentials) {
     if (!is.null(last_result$"next")) {
         return(hubr::filter(last_result$path, last_result$filter, credentials, last_result$"next"))
@@ -251,6 +252,7 @@ filter_next <- function(last_result, credentials) {
     }
 }
 
+#' @export
 filter_previous <- function(last_result, credentials) {
     if (!is.null(last_result$"previous")) {
         return(hubr::filter(last_result$path, last_result$filter, credentials, last_result$"previous"))
@@ -295,12 +297,11 @@ handle_response <- function(response, path, expected) {
 #' @export
 check_version <- function(warn_only = F) {
     current_version <- packageVersion("hubr")
-    online_version = NULL
+    online_version <- NULL
     tryCatch(
         {
             online_version <- stringr::str_split(readr::read_lines("https://raw.githubusercontent.com/clessn/hubr/master/DESCRIPTION")[[4]], ": ")[[1]][[2]]
-        }
-        ,
+        },
         error = function(e) {
             warning("could not check for updates")
         }

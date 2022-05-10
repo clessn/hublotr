@@ -19,17 +19,16 @@ credentials <- hubr::get_credentials("https://clhub.clessn.cloud/", "admin", "mo
 # UN MAUVAIS NOM D'UTILISATEUR OU DE MOT DE PASSE NE SERA PAS RAPPORTÉ AVANT UNE PREMIÈRE UTILISATION DE FONCTION
 
 ## LES FONCTIONS
-hubr::list_warehouses(credentials) # retourne la liste des entrepôts
-hubr::list_marts(credentials) # retourne la liste des comptoirs
+hubr::list_tables(credentials) # retourne la liste des tables
 # avec le package tidyjson, on peut convertir ces listes de listes en tibble
-warehouses <- tidyjson::spread_all(hubr::list_warehouses(credentials))
+tables <- tidyjson::spread_all(hubr::list_tables(credentials))
 
-# admettons que j'ai sélectionné un comptoir et je veux y extraire des données
-my_mart <- "clhub_marts_my_mart"
-hubr::count_warehouse_items(my_mart, credentials) # le nombre total d'éléments dans le comptoir
+# admettons que j'ai sélectionné une table et je veux y extraire des données
+my_table <- "clhub_tables_test_table"
+hubr::count_table_items(my_table, credentials) # le nombre total d'éléments dans la table
 # les éléments d'une table sont paginés, généralement à coup de 1000. Pour récupérer tous les éléments, on doit demander les données suivantes. On commence par une page, puis on demande une autre, jusqu'à ce que la page soit NULL
 
-page <- hubr::list_warehouse_items(my_mart, credentials) # on récupère la première page et les informations pour les apges suivantes
+page <- hubr::list_table_items(my_table, credentials) # on récupère la première page et les informations pour les apges suivantes
 data <- list() # on crée une liste vide pour contenir les données
 repeat {
     data <- c(data, page$results)
@@ -42,8 +41,7 @@ Dataframe <- tidyjson::spread_all(data) # on convertir maintenant les données e
 
 # télécharger un subset des données grâce au filtrage
 # les fonctions pertinentes:
-hubr::filter_warehouse_items(table_name, credentials, filter)
-hubr::filter_mart_items(table_name, credentials, filter)
+hubr::filter_table_items(table_name, credentials, filter)
 hubr::filter_next(page, credentials)
 hubr::filter_previous(page, credentials)
 
@@ -71,9 +69,8 @@ my_filter <- list(
     key__regex="^potato", # non testé
 )
 
-# Ajouter un élément dans un comptoir ou un entrepôt
-hubr::add_mart_item(...)
-hubr::add_warehouse_item(table_name,
+# Ajouter un élément dans une table
+hubr::add_table_item(table_name,
         body = list(
             key = key,
             timestamps <- "2020-01-01",

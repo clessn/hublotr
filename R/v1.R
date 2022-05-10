@@ -1,9 +1,24 @@
 # logs
 
 #' @export
-send_log <- function(app_id, level, message, credentials) {
-    stop("not implemented")
+log <- function(app_id, level, message, credentials) {
+    url <- paste0("/logs/", app_id, "/")
+    hubr::create(url, list(level = level, message = message), credentials)
+    if (level == "error" || level == "critical") {
+        stop(message)
+    } else if (level == "warning") {
+        warning(message)
+    } else if (level == "info") {
+        print(message)
+    } else if (level == "success") {
+        print(paste0("Success: ", message))
+    } else if (level == "debug") {
+        print(paste0("Debug: ", message))
+    } else {
+        stop(paste("Unknown level: ", level, ", should be one of debug, info, warning, error, critical or success"))
+    }
 }
+
 #' @export
 list_logs <- function(credentials) {
     stop("not implemented")
@@ -21,86 +36,47 @@ retrieve_journal <- function(id, credentials) {
     stop("not implemented")
 }
 
-# warehouses
+# tables
 
 #' @export
-list_warehouses <- function(credentials) {
-    path <- "api/v1/warehouses/"
-    return(hubr::list(path, credentials))
+list_tables <- function(credentials) {
+    path <- "api/v1/dynamic_tables/"
+    return(hubr::list_(path, credentials))
 }
 #' @export
-list_warehouse_items <- function(warehouse_table, credentials, cursor = NULL) {
-    path <- paste0("api/v1/", warehouse_table, "/")
+list_table_items <- function(table_name, credentials, cursor = NULL) {
+    path <- paste0("api/v1/", table_name, "/")
     return(hubr::list_paginated(path, credentials, cursor))
 }
 #' @export
-filter_warehouse_items <- function(warehouse_table, credentials, filter) {
-    path <- paste0("api/v1/", warehouse_table, "/")
+filter_table_items <- function(table_name, credentials, filter) {
+    path <- paste0("api/v1/", table_name, "/")
     return(hubr::filter(path, filter, credentials))
 }
 #' @export
-count_warehouse_items <- function(warehouse_table, credentials, filter = NULL) {
-    path <- paste0("api/v1/", warehouse_table, "/")
+count_table_items <- function(table_name, credentials, filter = NULL) {
+    path <- paste0("api/v1/", table_name, "/")
     return(hubr::count(path, filter, credentials))
 }
 
 #' @export
-add_warehouse_item <- function(warehouse_table, body, credentials) {
-    path <- paste0("api/v1/", warehouse_table, "/")
+add_table_item <- function(table_name, body, credentials) {
+    path <- paste0("api/v1/", table_name, "/")
     return(hubr::create(path, body, credentials))
 }
 #' @export
-retrieve_warehouse_item <- function(warehouse_table, id, credentials) {
-    path <- paste0("api/v1/", warehouse_table, "/", id, "/")
+retrieve_table_item <- function(table_name, id, credentials) {
+    path <- paste0("api/v1/", table_name, "/", id, "/")
     return(hubr::retrieve(path, credentials))
 }
 #' @export
-update_warehouse_item <- function(warehouse_table, id, body, credentials) {
-    path <- paste0("api/v1/", warehouse_table, "/", id, "/")
+update_table_item <- function(table_name, id, body, credentials) {
+    path <- paste0("api/v1/", table_name, "/", id, "/")
     return(hubr::update(path, body, credentials))
 }
 #' @export
-remove_warehouse_item <- function(warehouse_table, id, credentials) {
-    path <- paste0("api/v1/", warehouse_table, "/", id, "/")
-    return(hubr::remove(path, credentials))
-}
-
-# marts
-
-#' @export
-list_marts <- function(credentials) {
-    path <- "api/v1/marts/"
-    return(hubr::list(path, credentials))
-}
-#' @export
-add_mart_item <- function(mart_table, body, credentials) {
-    path <- paste0("api/v1/", mart_table, "/")
-    return(hubr::create(path, body, credentials))
-}
-#' @export
-filter_mart_items <- function(mart_table, credentials, filter) {
-    path <- paste0("api/v1/", mart_table, "/")
-    return(hubr::filter(path, filter, credentials))
-}
-#' @export
-count_mart_items <- function(mart_table, credentials, filter = NULL) {
-    path <- paste0("api/v1/", mart_table, "/")
-    return(hubr::count(path, filter, credentials))
-}
-
-#' @export
-retrieve_mart_item <- function(mart_table, id, credentials) {
-    path <- paste0("api/v1/", mart_table, "/", id, "/")
-    return(hubr::retrieve(path, credentials))
-}
-#' @export
-update_mart_item <- function(mart_table, id, body, credentials) {
-    path <- paste0("api/v1/", mart_table, "/", id, "/")
-    return(hubr::update(path, body, credentials))
-}
-#' @export
-remove_mart_item <- function(mart_table, id, credentials) {
-    path <- paste0("api/v1/", mart_table, "/", id, "/")
+remove_table_item <- function(table_name, id, credentials) {
+    path <- paste0("api/v1/", table_name, "/", id, "/")
     return(hubr::remove(path, credentials))
 }
 
