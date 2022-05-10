@@ -79,3 +79,16 @@ hubr::add_lake_item(body = list(
     file = httr::upload_file("test_upload.txt"),
     metadata = jsonlite::toJSON(list(type = "text"), auto_unbox = T)
 ), credentials)
+
+
+for (i in 1:rowcount(variables_df))
+{
+    hubr::create_variable(
+        body = list(
+            key=variables_df[[i, "key"]],
+            name=variables_df[[i, "name"]],
+            description=variables_df[[i, "description"]],
+            ...
+        )
+    )
+}

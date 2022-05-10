@@ -172,7 +172,7 @@ filter_files <- function(credentials, filter) {
 #' @export
 retrieve_file <- function(id, credentials) {
     path <- paste0("api/v1/files/", id, "/")
-    return(hubr::retrieve(path, credentials))
+    return(hubr::retrieve(path, id, credentials))
 }
 #' @export
 add_file <- function(id, body, credentials) {
