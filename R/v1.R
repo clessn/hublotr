@@ -161,15 +161,18 @@ remove_tag <- function(id, credentials) {
 
 #' @export
 list_files <- function(credentials) {
-    stop("not implemented")
+    path <- "api/v1/files/"
+    return(hubr::list_(path, credentials))
 }
 #' @export
 filter_files <- function(credentials, filter) {
-    stop("not implemented")
+    path <- "api/v1/files/"
+    return(hubr::filter(path, filter, credentials))
 }
 #' @export
 retrieve_file <- function(id, credentials) {
-    stop("not implemented")
+    path <- paste0("api/v1/files/", id, "/")
+    return(hubr::retrieve(path, credentials))
 }
 #' @export
 add_file <- function(id, body, credentials) {
