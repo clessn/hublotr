@@ -262,6 +262,10 @@ filter <- function(path, body, credentials, cursor = NULL) {
     }
     response <- hubr::post(path, body, credentials = credentials)
     result <- hubr::handle_response(response, path, 200)
+    if(is.null(names(result)))
+    {
+        result <- list(results=result)
+    }
     result$path <- orig_path
     result$filter <- body
 

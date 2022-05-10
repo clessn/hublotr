@@ -56,6 +56,11 @@ list_tables <- function(credentials) {
     return(hubr::list_(path, credentials))
 }
 #' @export
+filter_tables <- function(credentials, filter) {
+    path <- "api/v1/dynamic_tables/"
+    return(hubr::filter(path, filter, credentials))
+}
+#' @export
 list_table_items <- function(table_name, credentials, cursor = NULL) {
     path <- paste0("api/v1/", table_name, "/")
     return(hubr::list_paginated(path, credentials, cursor))

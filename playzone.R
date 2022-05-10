@@ -10,6 +10,20 @@ credentials <- hubr::get_credentials("http://localhost:8080/")
 # list all tables
 tables <- tidyjson::spread_all(hubr::list_tables(credentials))
 
+
+# filter tables by type
+marts <- tidyjson::spread_all(
+    hubr::filter_tables(credentials,
+        list(metadata__type="mart")
+    )$results
+)
+
+warehouses <- tidyjson::spread_all(
+    hubr::filter_tables(credentials,
+        list(metadata__type="warehouse")
+    )$results
+)
+
 # select a table
 table_name <- tables$db_table[[1]]
 
