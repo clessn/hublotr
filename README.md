@@ -107,6 +107,10 @@ hubr::add_lake_item(body = list(
 ), credentials)
 
 
+# To read a file (for example a dictionary)
+file_info <- hubr::retrieve_file("dictionnaire_LexicoderFR-enjeux", credentials)
+dict <- read.csv(file_info$file)
+
 # Pour les logs
 hubr::log(app_id, "info", "Starting...", credentials)
 hubr::log(app_id, "debug", "test123", credentials)
@@ -114,6 +118,7 @@ hubr::log(app_id, "warning", "this might be a problem later", credentials)
 hubr::log(app_id, "error", "something went wrong", credentials)
 hubr::log(app_id, "critical", "something went terribly wrong", credentials)
 hubr::log(app_id, "success", "good! everything worked!", credentials)
+
 
 
 ```
