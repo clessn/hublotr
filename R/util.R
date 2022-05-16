@@ -219,35 +219,35 @@ list_previous <- function(last_result, credentials) {
 
 #' @export
 create <- function(path, body, credentials) {
-    response <- hubr::post(path, body = body, credentials = credentials)
+    response <- hubr::post(path, body, credentials)
     result <- hubr::handle_response(response, path, 201)
     return(result)
 }
 
 #' @export
 form_create <- function(path, body, credentials) {
-    response <- hubr::form_post(path, body = body, credentials = credentials)
+    response <- hubr::form_post(path, body, credentials)
     result <- hubr::handle_response(response, path, 201)
     return(result)
 }
 
 #' @export
-retrieve <- function(path, id, credentials) {
-    response <- hubr::get(path, credentials = credentials)
+retrieve <- function(path, credentials) {
+    response <- hubr::get(path, credentials)
     result <- hubr::handle_response(response, path, 200)
     return(result)
 }
 
 #' @export
-update <- function(path, id, body, credentials) {
-    response <- hubr::patch(path, body = body, credentials = credentials)
+update <- function(path, body, credentials) {
+    response <- hubr::patch(path, body, credentials)
     result <- hubr::handle_response(response, path, 200)
     return(result)
 }
 
 #' @export
-remove <- function(path, id, credentials) {
-    response <- hubr::delete(path, credentials = credentials)
+remove <- function(path, credentials) {
+    response <- hubr::delete(path, credentials)
     result <- hubr::handle_response(response, path, 204)
     return(result)
 }
