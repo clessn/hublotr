@@ -97,5 +97,7 @@ for (i in 1:rowcount(variables_df))
 
 
 file_info <- hubr::retrieve_file("test", credentials)
-file_info <- hubr::retrieve_lake_item("21c99719-701b-4876-867d-0795b3b1aea3", credentials)
 Df <- read.csv(file_info$file)
+
+data <- hubr::filter_lake_items(credentials, list(key = "21c99719-701b-4876-867d-0795b3b1aea3"))
+df <- tidyjson::spread_all(data$results)

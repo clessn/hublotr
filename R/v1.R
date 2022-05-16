@@ -89,12 +89,12 @@ retrieve_table_item <- function(table_name, id, credentials) {
 #' @export
 update_table_item <- function(table_name, id, body, credentials) {
     path <- paste0("api/v1/", table_name, "/", id, "/")
-    return(hubr::update(path, body, credentials))
+    return(hubr::update(path, id, body, credentials))
 }
 #' @export
 remove_table_item <- function(table_name, id, credentials) {
     path <- paste0("api/v1/", table_name, "/", id, "/")
-    return(hubr::remove(path, credentials))
+    return(hubr::remove(path, id, credentials))
 }
 
 # lake
@@ -122,12 +122,12 @@ add_lake_item <- function(body, credentials) {
 #' @export
 update_lake_item <- function(id, body, credentials) {
     path <- paste0("api/v1/lake/", id, "/")
-    return(hubr::update(path, body, credentials))
+    return(hubr::update(path, id, body, credentials))
 }
 #' @export
 remove_lake_item <- function(id, credentials) {
     path <- paste0("api/v1/lake/", id, "/")
-    return(hubr::remove(path, credentials))
+    return(hubr::remove(path, id, credentials))
 }
 
 # tags
