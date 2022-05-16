@@ -47,7 +47,7 @@ get <- function(path, options = NULL, credentials = NULL, verify = T, timeout = 
         path <- paste0(credentials$hub_url, path, params)
         config <- httr::add_headers(Authorization = paste(credentials$prefix, credentials$auth))
     }
-
+    print(path)
     response <- httr::GET(
         url = path,
         config = config, verify = verify, httr::timeout(timeout)
@@ -232,7 +232,7 @@ form_create <- function(path, body, credentials) {
 
 #' @export
 retrieve <- function(path, credentials) {
-    response <- hubr::get(path, credentials)
+    response <- hubr::get(path, NULL, credentials)
     result <- hubr::handle_response(response, path, 200)
     return(result)
 }
