@@ -104,7 +104,7 @@ form_post <- function(path, body, credentials = NULL, verify = T, timeout = 30) 
 }
 
 #' @export
-delete <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
+delete <- function(path, credentials = NULL, verify = T, timeout = 30) {
     config <- NULL
     if (is.null(credentials)) {
         # ignore credentials completely
@@ -120,7 +120,6 @@ delete <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
 
     response <- httr::DELETE(
         url = path,
-        body = body,
         config = config, verify = verify, httr::timeout(timeout)
     )
     return(response)
