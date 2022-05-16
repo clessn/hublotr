@@ -233,6 +233,7 @@ form_create <- function(path, body, credentials) {
 
 #' @export
 retrieve <- function(path, id, credentials) {
+    path <- paste0(path, "/", id, "/")
     response <- hubr::get(path, credentials = credentials)
     result <- hubr::handle_response(response, path, 200)
     return(result)
@@ -240,6 +241,7 @@ retrieve <- function(path, id, credentials) {
 
 #' @export
 update <- function(path, id, body, credentials) {
+    path <- paste0(path, "/", id, "/")
     response <- hubr::patch(path, body = body, credentials = credentials)
     result <- hubr::handle_response(response, path, 200)
     return(result)
@@ -247,6 +249,7 @@ update <- function(path, id, body, credentials) {
 
 #' @export
 remove <- function(path, id, credentials) {
+    path <- paste0(path, "/", id, "/")
     response <- hubr::delete(path, credentials = credentials)
     result <- hubr::handle_response(response, path, 204)
     return(result)
@@ -262,9 +265,8 @@ filter <- function(path, body, credentials, cursor = NULL) {
     }
     response <- hubr::post(path, body, credentials = credentials)
     result <- hubr::handle_response(response, path, 200)
-    if(is.null(names(result)))
-    {
-        result <- list(results=result)
+    if (is.null(names(result))) {
+        result <- list(results = result)
     }
     result$path <- orig_path
     result$filter <- body
