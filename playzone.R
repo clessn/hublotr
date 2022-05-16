@@ -13,14 +13,16 @@ tables <- tidyjson::spread_all(hubr::list_tables(credentials))
 
 # filter tables by type
 marts <- tidyjson::spread_all(
-    hubr::filter_tables(credentials,
-        list(metadata__type="mart")
+    hubr::filter_tables(
+        credentials,
+        list(metadata__type = "mart")
     )$results
 )
 
 warehouses <- tidyjson::spread_all(
-    hubr::filter_tables(credentials,
-        list(metadata__type="warehouse")
+    hubr::filter_tables(
+        credentials,
+        list(metadata__type = "warehouse")
     )$results
 )
 
@@ -85,10 +87,15 @@ for (i in 1:rowcount(variables_df))
 {
     hubr::create_variable(
         body = list(
-            key=variables_df[[i, "key"]],
-            name=variables_df[[i, "name"]],
-            description=variables_df[[i, "description"]],
+            key = variables_df[[i, "key"]],
+            name = variables_df[[i, "name"]],
+            description = variables_df[[i, "description"]],
             ...
         )
     )
 }
+
+
+file_info <- hubr::retrieve_file("test", credentials)
+file_info <- hubr::retrieve_lake_item("21c99719-701b-4876-867d-0795b3b1aea3", credentials)
+Df <- read.csv(file_info$file)

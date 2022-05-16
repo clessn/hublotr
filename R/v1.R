@@ -31,7 +31,7 @@ filter_logs <- function(credentials, filter) {
 #' @export
 retrieve_log <- function(id, credentials) {
     path <- paste0("api/v1/", id, "/")
-    return(hubr::retrieve(path, credentials))
+    return(hubr::retrieve(path, id, credentials))
 }
 #' @export
 list_journals <- function(credentials) {
@@ -45,7 +45,7 @@ filter_journals <- function(credentials, filter) {
 #' @export
 retrieve_journal <- function(id, credentials) {
     path <- paste0("api/v1/", id, "/")
-    return(hubr::retrieve(path, credentials))
+    return(hubr::retrieve(path, id, credentials))
 }
 
 # tables
@@ -84,7 +84,7 @@ add_table_item <- function(table_name, body, credentials) {
 #' @export
 retrieve_table_item <- function(table_name, id, credentials) {
     path <- paste0("api/v1/", table_name, "/", id, "/")
-    return(hubr::retrieve(path, credentials))
+    return(hubr::retrieve(path, id, credentials))
 }
 #' @export
 update_table_item <- function(table_name, id, body, credentials) {
@@ -112,7 +112,7 @@ filter_lake_items <- function(credentials, filter) {
 #' @export
 retrieve_lake_item <- function(id, credentials) {
     path <- paste0("api/v1/lake/", id, "/")
-    return(hubr::retrieve(path, credentials))
+    return(hubr::retrieve(path, id, credentials))
 }
 #' @export
 add_lake_item <- function(body, credentials) {

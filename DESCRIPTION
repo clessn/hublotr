@@ -1,7 +1,7 @@
 Package: hubr
 Type: Package
 Title: Package d'accès à clHub
-Version: 1.3.2
+Version: 1.3.3
 Author: Olivier Banville <oli.banville@gmail.com>
 Maintainer: Olivier Banville <oli.banville@gmail.com>
 Description: Package d'accès à clHub
