@@ -82,4 +82,43 @@ hubr::add_table_item(table_name,
         credentials
     )
 
+
+# Obtenir les tables de l'entrepôt vs. celles de datamarts
+marts <- tidyjson::spread_all(
+    hubr::filter_tables(credentials,
+        list(metadata__contains=list(type="mart"))
+    )
+)
+
+warehouses <- tidyjson::spread_all(
+    hubr::filter_tables(credentials,
+        list(metadata__contains=list(type="warehouse"))
+    )
+)
+
+
+# to upload a file, endpoints work a bit differently.
+# you need to convert the json yourself (in this example, the metadata)
+hubr::add_lake_item(body = list(
+    key = "mylakeitem",
+    path = "test/items",
+    file = httr::upload_file("test_upload.txt"),
+    metadata = jsonlite::toJSON(list(type = "text"), auto_unbox = T)
+), credentials)
+
+
+# To read a file (for example a dictionary)
+file_info <- hubr::retrieve_file("dictionnaire_LexicoderFR-enjeux", credentials)
+dict <- read.csv(file_info$file)
+
+# Pour les logs
+hubr::log(app_id, "info", "Starting...", credentials)
+hubr::log(app_id, "debug", "test123", credentials)
+hubr::log(app_id, "warning", "this might be a problem later", credentials)
+hubr::log(app_id, "error", "something went wrong", credentials)
+hubr::log(app_id, "critical", "something went terribly wrong", credentials)
+hubr::log(app_id, "success", "good! everything worked!", credentials)
+
+
+
 ```
