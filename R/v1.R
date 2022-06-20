@@ -50,7 +50,7 @@ retrieve_journal <- function(id, credentials) {
 
 # tables
 
-' @export
+#' @export
 list_tables <- function(credentials) {
     path <- "api/v1/dynamic_tables/"
     return(hublot::list_(path, credentials))
