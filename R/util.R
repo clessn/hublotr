@@ -218,8 +218,8 @@ options <- function(path, credentials = NULL, verify = T, timeout = 30) {
 #' @return depends on the endpoint. Usually a named list with a "results" key containing a list of elements, or a list of elements.
 #' @export
 list_ <- function(path, credentials) {
-    response <- hubr::get(path, credentials = credentials)
-    result <- hubr::handle_response(response, path, 200)
+    response <- hublot::get(path, credentials = credentials)
+    result <- hublot::handle_response(response, path, 200)
     return(result)
 }
 
@@ -233,8 +233,8 @@ list_paginated <- function(path, credentials, cursor = NULL) {
     if (!is.null(cursor)) {
         path <- paste0(path, "?", cursor)
     }
-    response <- hubr::get(path, credentials = credentials)
-    result <- hubr::handle_response(response, path, 200)
+    response <- hublot::get(path, credentials = credentials)
+    result <- hublot::handle_response(response, path, 200)
     result$path <- orig_path
 
     if (!is.null(result$"next")) {
@@ -249,7 +249,7 @@ list_paginated <- function(path, credentials, cursor = NULL) {
 #' @export
 list_next <- function(last_result, credentials) {
     if (!is.null(last_result$"next")) {
-        return(hubr::list_paginated(last_result$path, credentials, last_result$"next"))
+        return(hublot::list_paginated(last_result$path, credentials, last_result$"next"))
     } else {
         return(NULL)
     }
@@ -258,7 +258,7 @@ list_next <- function(last_result, credentials) {
 #' @export
 list_previous <- function(last_result, credentials) {
     if (!is.null(last_result$"previous")) {
-        return(hubr::list_paginated(last_result$path, credentials, last_result$"previous"))
+        return(hublot::list_paginated(last_result$path, credentials, last_result$"previous"))
     } else {
         return(NULL)
     }
@@ -267,36 +267,36 @@ list_previous <- function(last_result, credentials) {
 
 #' @export
 create <- function(path, body, credentials) {
-    response <- hubr::post(path, body, credentials)
-    result <- hubr::handle_response(response, path, 201)
+    response <- hublot::post(path, body, credentials)
+    result <- hublot::handle_response(response, path, 201)
     return(result)
 }
 
 #' @export
 form_create <- function(path, body, credentials) {
-    response <- hubr::form_post(path, body, credentials)
-    result <- hubr::handle_response(response, path, 201)
+    response <- hublot::form_post(path, body, credentials)
+    result <- hublot::handle_response(response, path, 201)
     return(result)
 }
 
 #' @export
 retrieve <- function(path, credentials) {
-    response <- hubr::get(path, NULL, credentials)
-    result <- hubr::handle_response(response, path, 200)
+    response <- hublot::get(path, NULL, credentials)
+    result <- hublot::handle_response(response, path, 200)
     return(result)
 }
 
 #' @export
 update <- function(path, body, credentials) {
-    response <- hubr::patch(path, body, credentials)
-    result <- hubr::handle_response(response, path, 200)
+    response <- hublot::patch(path, body, credentials)
+    result <- hublot::handle_response(response, path, 200)
     return(result)
 }
 
 #' @export
 remove <- function(path, credentials) {
-    response <- hubr::delete(path, credentials)
-    result <- hubr::handle_response(response, path, 204)
+    response <- hublot::delete(path, credentials)
+    result <- hublot::handle_response(response, path, 204)
     return(result)
 }
 
@@ -308,8 +308,8 @@ filter <- function(path, body, credentials, cursor = NULL) {
     if (!is.null(cursor)) {
         path <- paste0(path, "?", cursor)
     }
-    response <- hubr::post(path, body, credentials = credentials)
-    result <- hubr::handle_response(response, path, 200)
+    response <- hublot::post(path, body, credentials = credentials)
+    result <- hublot::handle_response(response, path, 200)
     if (is.null(names(result))) {
         result <- list(results = result)
     }
@@ -328,7 +328,7 @@ filter <- function(path, body, credentials, cursor = NULL) {
 #' @export
 filter_next <- function(last_result, credentials) {
     if (!is.null(last_result$"next")) {
-        return(hubr::filter(last_result$path, last_result$filter, credentials, last_result$"next"))
+        return(hublot::filter(last_result$path, last_result$filter, credentials, last_result$"next"))
     } else {
         return(NULL)
     }
@@ -337,7 +337,7 @@ filter_next <- function(last_result, credentials) {
 #' @export
 filter_previous <- function(last_result, credentials) {
     if (!is.null(last_result$"previous")) {
-        return(hubr::filter(last_result$path, last_result$filter, credentials, last_result$"previous"))
+        return(hublot::filter(last_result$path, last_result$filter, credentials, last_result$"previous"))
     } else {
         return(NULL)
     }
@@ -346,11 +346,11 @@ filter_previous <- function(last_result, credentials) {
 count <- function(path, filter, credentials) {
     path <- paste0(path, "count/")
     if (is.null(filter)) {
-        response <- hubr::get(path, credentials = credentials)
+        response <- hublot::get(path, credentials = credentials)
     } else {
-        response <- hubr::post(path, body = filter, credentials = credentials)
+        response <- hublot::post(path, body = filter, credentials = credentials)
     }
-    result <- hubr::handle_response(response, path, 200)
+    result <- hublot::handle_response(response, path, 200)
     return(result)
 }
 
@@ -378,26 +378,26 @@ handle_response <- function(response, path, expected) {
 
 #' @export
 check_version <- function(warn_only = F) {
-    current_version <- packageVersion("hubr")
+    current_version <- packageVersion("hublot")
     online_version <- NULL
     tryCatch(
         {
-            online_version <- stringr::str_split(readr::read_lines("https://raw.githubusercontent.com/clessn/hubr/master/DESCRIPTION")[[4]], ": ")[[1]][[2]]
+            online_version <- stringr::str_split(readr::read_lines("https://raw.githubusercontent.com/clessn/hublot/master/DESCRIPTION")[[4]], ": ")[[1]][[2]]
         },
         error = function(e) {
             warning("could not check for updates")
         }
     )
 
-    online_version <- stringr::str_split(readr::read_lines("https://raw.githubusercontent.com/clessn/hubr/master/DESCRIPTION")[[4]], ": ")[[1]][[2]]
+    online_version <- stringr::str_split(readr::read_lines("https://raw.githubusercontent.com/clessn/hublot/master/DESCRIPTION")[[4]], ": ")[[1]][[2]]
 
     if (current_version != online_version) {
         if (warn_only) {
-            warning(paste0("hubr version ", current_version, " is outdated (v", online_version, " available)!"))
+            warning(paste0("hublot version ", current_version, " is outdated (v", online_version, " available)!"))
         } else {
-            stop(paste0("hubr version ", current_version, " is outdated (v", online_version, " available)!"))
+            stop(paste0("hublot version ", current_version, " is outdated (v", online_version, " available)!"))
         }
     } else {
-        print(paste0("hubr version ", current_version, " is up to date."))
+        print(paste0("hublot version ", current_version, " is up to date."))
     }
 }
