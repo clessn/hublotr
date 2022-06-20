@@ -1,26 +1,26 @@
-devtools::install_github("clessn/hubr")
+devtools::install_github("clessn/hublotr")
 
 # validate you have the latest version
-hubr::check_version()
+hublot::check_version()
 
 # enter credentials
-credentials <- hubr::get_credentials("https://clhub.clessn.cloud/")
-credentials <- hubr::get_credentials("http://localhost:8080/")
+credentials <- hublot::get_credentials("https://clhub.clessn.cloud/")
+credentials <- hublot::get_credentials("http://localhost:8080/")
 
 # list all tables
-tables <- tidyjson::spread_all(hubr::list_tables(credentials))
+tables <- tidyjson::spread_all(hublot::list_tables(credentials))
 
 
 # filter tables by type
 marts <- tidyjson::spread_all(
-    hubr::filter_tables(
+    hublot::filter_tables(
         credentials,
         list(metadata__type = "mart")
     )$results
 )
 
 warehouses <- tidyjson::spread_all(
-    hubr::filter_tables(
+    hublot::filter_tables(
         credentials,
         list(metadata__type = "warehouse")
     )$results
@@ -30,15 +30,15 @@ warehouses <- tidyjson::spread_all(
 table_name <- tables$db_table[[1]]
 
 # log information to the hub
-hubr::log(app_id, "info", "Starting...", credentials)
-hubr::log(app_id, "debug", "test123", credentials)
-hubr::log(app_id, "warning", "this might be a problem later", credentials)
-hubr::log(app_id, "error", "something went wrong", credentials)
-hubr::log(app_id, "critical", "something went terribly wrong", credentials)
-hubr::log(app_id, "success", "good! everything worked!", credentials)
+hublot::log(app_id, "info", "Starting...", credentials)
+hublot::log(app_id, "debug", "test123", credentials)
+hublot::log(app_id, "warning", "this might be a problem later", credentials)
+hublot::log(app_id, "error", "something went wrong", credentials)
+hublot::log(app_id, "critical", "something went terribly wrong", credentials)
+hublot::log(app_id, "success", "good! everything worked!", credentials)
 
 tidyjson::spread_all(
-    hubr::filter_logs(credentials, filter = list(application = "test"))$results
+    hublot::filter_logs(credentials, filter = list(application = "test"))$results
 )
 
 # add a new item
@@ -46,7 +46,7 @@ for (i in 1:2000) {
     print(i)
     key <- paste(sample(LETTERS, 32, TRUE), collapse = "")
 
-    result <- hubr::add_table_item(table_name,
+    result <- hublot::add_table_item(table_name,
         body = list(
             key = key,
             data = list(type = "potato", kind = "vegetable")
@@ -60,12 +60,12 @@ for (i in 1:2000) {
 filter <- list(
     key__contains = "A"
 )
-count <- hubr::count_table_items(table_name, credentials, filter)[[1]]
-page <- hubr::filter_table_items(table_name, credentials, filter)
+count <- hublot::count_table_items(table_name, credentials, filter)[[1]]
+page <- hublot::filter_table_items(table_name, credentials, filter)
 data <- list() # on crée une liste vide pour contenir les données
 repeat {
     data <- c(data, page$results)
-    page <- hubr::filter_next(page, credentials)
+    page <- hublot::filter_next(page, credentials)
     if (is.null(page)) {
         break
     }
@@ -75,7 +75,7 @@ df <- tidyjson::spread_all(data)
 
 # to upload a file, endpoints work a bit differently.
 # you need to convert the json yourself (in this example, the metadata)
-hubr::add_lake_item(body = list(
+hublot::add_lake_item(body = list(
     key = "mylakeitem",
     path = "test/items",
     file = httr::upload_file("test_upload.txt"),
@@ -85,7 +85,7 @@ hubr::add_lake_item(body = list(
 
 for (i in 1:rowcount(variables_df))
 {
-    hubr::create_variable(
+    hublot::create_variable(
         body = list(
             key = variables_df[[i, "key"]],
             name = variables_df[[i, "name"]],
@@ -96,8 +96,8 @@ for (i in 1:rowcount(variables_df))
 }
 
 
-file_info <- hubr::retrieve_file("test", credentials)
+file_info <- hublot::retrieve_file("test", credentials)
 Df <- read.csv(file_info$file)
 
-data <- hubr::filter_lake_items(credentials, list(key = "21c99719-701b-4876-867d-0795b3b1aea3"))
+data <- hublot::filter_lake_items(credentials, list(key = "21c99719-701b-4876-867d-0795b3b1aea3"))
 df <- tidyjson::spread_all(data$results)
