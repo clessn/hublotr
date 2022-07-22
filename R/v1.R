@@ -1,9 +1,9 @@
 # logs
 
 #' @export
-log <- function(app_id, level, message, credentials) {
-    url <- paste0("api/v1/log/", app_id, "/")
-    hublot::create(url, list(level = level, message = message), credentials)
+log <- function(app_id, level, message, url) {
+    url <- paste0(url, "api/v1/log/", app_id, "/")
+    hublot::create(url, list(level = level, message = message), NULL)
     if (level == "error" || level == "critical") {
         stop(message)
     } else if (level == "warning") {
@@ -95,6 +95,24 @@ update_table_item <- function(table_name, id, body, credentials) {
 remove_table_item <- function(table_name, id, credentials) {
     path <- paste0("api/v1/", table_name, "/", id, "/")
     return(hublot::remove(path, credentials))
+}
+
+#' @export
+#' The body must be a list of json elements
+batch_create_table_items <- function(table_name, body, credentials) {
+    path <- paste0("api/v1/", table_name, "/batch_create/")
+    response <- hublot::post(path, body, credentials)
+    result <- hublot::handle_response(response, path, 200)
+    return(result)
+}
+
+#' @export
+#' The body must be a list of ids (not keys)
+batch_delete_table_items <- function(table_name, body, credentials) {
+    path <- paste0("api/v1/", table_name, "/batch_delete/")
+    response <- hublot::post(path, body, credentials)
+    result <- hublot::handle_response(response, path, 200)
+    return(result)
 }
 
 # lake
