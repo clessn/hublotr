@@ -113,7 +113,7 @@ my_filter <- list(
 
 #### Ajouter un élément dans une table
 
-```
+```R
 hublot::add_table_item(table_name,
         body = list(
             key = key,
@@ -129,7 +129,7 @@ hublot::add_table_item(table_name,
 
 #### Obtenir les tables de l'entrepôt vs. celles de datamarts
 
-```
+```R
 marts <- tidyjson::spread_all(
     hublot::filter_tables(credentials,
         list(metadata__contains=list(type="mart"))
@@ -167,7 +167,7 @@ dict <- read.csv(file_info$file)
 
 Pour les logs
 
-```
+```R
 hublot::log(app_id, "info", "Starting...", credentials)
 hublot::log(app_id, "debug", "test123", credentials)
 hublot::log(app_id, "warning", "this might be a problem later", credentials)
