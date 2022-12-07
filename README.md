@@ -73,22 +73,24 @@ repeat {
     }
 }
 Dataframe <- tidyjson::spread_all(data) # on convertir maintenant les données en tibble
-
 ```
 
 #### Télécharger un subset des données grâce au filtrage
 
+Les fonctions pertinentes:
+
 ```R
-# les fonctions pertinentes:
 hublot::filter_table_items(table_name, credentials, filter)
 hublot::filter_next(page, credentials)
 hublot::filter_previous(page, credentials)
+```
 
-# un filtre est une liste nommée d'une certaine façon qui détermine la structure de la requête SQL
-# un filtre hublot est basé sur le [Queryset field lookup API](https://docs.djangoproject.com/en/4.0/ref/models/querysets/#field-lookups-1) de django
-# il est re commandé de télécharger une page ou un élément et d'en observer la structure avant de créer un filtre.
+Un filtre est une liste nommée d'une certaine façon qui détermine la structure de la requête SQL
+Un filtre hublot est basé sur le [Queryset field lookup API](https://docs.djangoproject.com/en/4.0/ref/models/querysets/#field-lookups-1) de django
+Il est re commandé de télécharger une page ou un élément et d'en observer la structure avant de créer un filtre.
 
-# quelques exemples. Notez q'un lookup sépare la colonne par deux underscore __
+Voici quelques exemples. Notez q'un lookup sépare la colonne par deux underscore __
+```R
 my_filter <- list(
     id=27,
     key__exact="potato",
@@ -143,27 +145,29 @@ warehouses <- tidyjson::spread_all(
 
 #### Upload a file
 
-```R
+To upload a file, endpoints work a bit differently. You need to convert the json yourself (in this example, the metadata):
 
-# to upload a file, endpoints work a bit differently.
-# you need to convert the json yourself (in this example, the metadata)
+```R
 hublot::add_lake_item(body = list(
     key = "mylakeitem",
     path = "test/items",
     file = httr::upload_file("test_upload.txt"),
     metadata = jsonlite::toJSON(list(type = "text"), auto_unbox = T)
 ), credentials)
-
 ```
 
 #### Read a file
 
+To read a file (for example a dictionary)
+
 ```R
-# To read a file (for example a dictionary)
 file_info <- hublot::retrieve_file("dictionnaire_LexicoderFR-enjeux", credentials)
 dict <- read.csv(file_info$file)
+```
 
-# Pour les logs
+Pour les logs
+
+```
 hublot::log(app_id, "info", "Starting...", credentials)
 hublot::log(app_id, "debug", "test123", credentials)
 hublot::log(app_id, "warning", "this might be a problem later", credentials)
