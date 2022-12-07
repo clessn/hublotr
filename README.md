@@ -1,9 +1,15 @@
 # hublot
 
+## Installation
+
+To install the latest stable version of this package, run the following line in your R console:
+
+```R
+devtools::install_github("clessn/hublotr")
+```
+
 ## Snippets
 ```R
-# installer hublot
-devtools::install_github("clessn/hublotr")
 
 # valider si nous avons la dernière version, sinon lève une erreur
 hublot::check_version()
