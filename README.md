@@ -1,5 +1,7 @@
 # hublot
 
+Package d'accès à clHub.
+
 ## Installation
 
 To install the latest stable version of this package, run the following line in your R console:
