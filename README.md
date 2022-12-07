@@ -1,10 +1,42 @@
 # hublot
 
-## Snippets
-```R
-# installer hublot
-devtools::install_github("clessn/hublotr")
+Package d'accès à clHub.
 
+## Installation
+
+To install the latest stable version of this package, run the following line in your R console:
+
+```R
+devtools::install_github("clessn/hublotr")
+```
+
+## Set your credentials in .Renviron
+
+1. Exécuter `usethis::edit_r_environ()` sur la ligne de commande R
+2. Ajouter les lignes suivantes dans .Renviron:
+```
+# .Renviron
+HUB3_URL      = "https://hublot.clessn.cloud/admin/"
+HUB3_USERNAME = "mon.nom.usager"
+HUB3_PASSWORD = "mon.mdp"
+```
+4. Redémarrer R (Session -> Restart R, ou Ctrl+Shift+F10)
+5. Taper dans la console R `Sys.getenv("HUB3_USERNAME")` pour confirmer que votre username apparait
+7. Terminé!
+
+### Get your credentials from .Renviron
+
+```R
+credentials <- hublot::get_credentials(
+            Sys.getenv("HUB3_URL"), 
+            Sys.getenv("HUB3_USERNAME"), 
+            Sys.getenv("HUB3_PASSWORD")
+            )
+```
+
+## Snippets
+
+```R
 # valider si nous avons la dernière version, sinon lève une erreur
 hublot::check_version()
 # alternativement, on peut faire hublot::check_version(warn_only = T) pour simplement lever un avertissement
@@ -17,8 +49,11 @@ credentials <- hublot::get_credentials("https://clhub.clessn.cloud/")
 credentials <- hublot::get_credentials("https://clhub.clessn.cloud/", "admin", "motdepasse")
 # c'est utile si les informations de connexion sont dans une variable d'environnement, qu'on peut alors récupérer comme suit: username <- Sys.getenv("hublot_USERNAME")
 # UN MAUVAIS NOM D'UTILISATEUR OU DE MOT DE PASSE NE SERA PAS RAPPORTÉ AVANT UNE PREMIÈRE UTILISATION DE FONCTION
+```
 
-## LES FONCTIONS
+### Les fonctions
+
+```R
 hublot::list_tables(credentials) # retourne la liste des tables
 # avec le package tidyjson, on peut convertir ces listes de listes en tibble
 tables <- tidyjson::spread_all(hublot::list_tables(credentials))
@@ -38,18 +73,24 @@ repeat {
     }
 }
 Dataframe <- tidyjson::spread_all(data) # on convertir maintenant les données en tibble
+```
 
-# télécharger un subset des données grâce au filtrage
-# les fonctions pertinentes:
+#### Télécharger un subset des données grâce au filtrage
+
+Les fonctions pertinentes:
+
+```R
 hublot::filter_table_items(table_name, credentials, filter)
 hublot::filter_next(page, credentials)
 hublot::filter_previous(page, credentials)
+```
 
-# un filtre est une liste nommée d'une certaine façon qui détermine la structure de la requête SQL
-# un filtre hublot est basé sur le [Queryset field lookup API](https://docs.djangoproject.com/en/4.0/ref/models/querysets/#field-lookups-1) de django
-# il est re commandé de télécharger une page ou un élément et d'en observer la structure avant de créer un filtre.
+Un filtre est une liste nommée d'une certaine façon qui détermine la structure de la requête SQL
+Un filtre hublot est basé sur le [Queryset field lookup API](https://docs.djangoproject.com/en/4.0/ref/models/querysets/#field-lookups-1) de django
+Il est re commandé de télécharger une page ou un élément et d'en observer la structure avant de créer un filtre.
 
-# quelques exemples. Notez q'un lookup sépare la colonne par deux underscore __
+Voici quelques exemples. Notez q'un lookup sépare la colonne par deux underscore __
+```R
 my_filter <- list(
     id=27,
     key__exact="potato",
@@ -68,8 +109,11 @@ my_filter <- list(
     timestamps__week_day=1, # non testé (1=dimanche, 7=samedi)
     key__regex="^potato", # non testé
 )
+```
 
-# Ajouter un élément dans une table
+#### Ajouter un élément dans une table
+
+```R
 hublot::add_table_item(table_name,
         body = list(
             key = key,
@@ -81,9 +125,11 @@ hublot::add_table_item(table_name,
         ),
         credentials
     )
+```
 
+#### Obtenir les tables de l'entrepôt vs. celles de datamarts
 
-# Obtenir les tables de l'entrepôt vs. celles de datamarts
+```R
 marts <- tidyjson::spread_all(
     hublot::filter_tables(credentials,
         list(metadata__contains=list(type="mart"))
@@ -95,30 +141,37 @@ warehouses <- tidyjson::spread_all(
         list(metadata__contains=list(type="warehouse"))
     )
 )
+```
 
+#### Upload a file
 
-# to upload a file, endpoints work a bit differently.
-# you need to convert the json yourself (in this example, the metadata)
+To upload a file, endpoints work a bit differently. You need to convert the json yourself (in this example, the metadata):
+
+```R
 hublot::add_lake_item(body = list(
     key = "mylakeitem",
     path = "test/items",
     file = httr::upload_file("test_upload.txt"),
     metadata = jsonlite::toJSON(list(type = "text"), auto_unbox = T)
 ), credentials)
+```
 
+#### Read a file
 
-# To read a file (for example a dictionary)
+To read a file (for example a dictionary)
+
+```R
 file_info <- hublot::retrieve_file("dictionnaire_LexicoderFR-enjeux", credentials)
 dict <- read.csv(file_info$file)
+```
 
-# Pour les logs
+Pour les logs
+
+```R
 hublot::log(app_id, "info", "Starting...", credentials)
 hublot::log(app_id, "debug", "test123", credentials)
 hublot::log(app_id, "warning", "this might be a problem later", credentials)
 hublot::log(app_id, "error", "something went wrong", credentials)
 hublot::log(app_id, "critical", "something went terribly wrong", credentials)
 hublot::log(app_id, "success", "good! everything worked!", credentials)
-
-
-
 ```
