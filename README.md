@@ -11,7 +11,6 @@ devtools::install_github("clessn/hublotr")
 ## Snippets
 
 ```R
-
 # valider si nous avons la dernière version, sinon lève une erreur
 hublot::check_version()
 # alternativement, on peut faire hublot::check_version(warn_only = T) pour simplement lever un avertissement
@@ -49,7 +48,11 @@ repeat {
 }
 Dataframe <- tidyjson::spread_all(data) # on convertir maintenant les données en tibble
 
-# télécharger un subset des données grâce au filtrage
+```
+
+#### Télécharger un subset des données grâce au filtrage
+
+```R
 # les fonctions pertinentes:
 hublot::filter_table_items(table_name, credentials, filter)
 hublot::filter_next(page, credentials)
@@ -81,6 +84,7 @@ my_filter <- list(
 ```
 
 #### Ajouter un élément dans une table
+
 ```
 hublot::add_table_item(table_name,
         body = list(
@@ -112,6 +116,7 @@ warehouses <- tidyjson::spread_all(
 ```
 
 #### Upload a file
+
 ```R
 
 # to upload a file, endpoints work a bit differently.
@@ -124,6 +129,7 @@ hublot::add_lake_item(body = list(
 ), credentials)
 
 ```
+
 #### Read a file
 
 ```R
