@@ -8,6 +8,30 @@ To install the latest stable version of this package, run the following line in 
 devtools::install_github("clessn/hublotr")
 ```
 
+## Set your credentials in .Renviron
+
+1. Exécuter `usethis::edit_r_environ()` sur la ligne de commande R
+2. Ajouter les lignes suivantes dans .Renviron:
+```
+# .Renviron
+HUB3_URL      = "https://hublot.clessn.cloud/admin/"
+HUB3_USERNAME = "mon.nom.usager"
+HUB3_PASSWORD = "mon.mdp"
+```
+4. Redémarrer R (Session -> Restart R, ou Ctrl+Shift+F10)
+5. Taper dans la console R `Sys.getenv("HUB3_USERNAME")` pour confirmer que votre username apparait
+7. Terminé!
+
+### Get your credentials from .Renviron
+
+```R
+credentials <- hublot::get_credentials(
+            Sys.getenv("HUB3_URL"), 
+            Sys.getenv("HUB3_USERNAME"), 
+            Sys.getenv("HUB3_PASSWORD")
+            )
+```
+
 ## Snippets
 
 ```R
