@@ -16,7 +16,7 @@ devtools::install_github("clessn/hublotr")
 2. Ajouter les lignes suivantes dans .Renviron:
 ```
 # .Renviron
-HUB3_URL      = "https://hublot.clessn.cloud/admin/"
+HUB3_URL      = "https://hublot.clessn.cloud/"
 HUB3_USERNAME = "mon.nom.usager"
 HUB3_PASSWORD = "mon.mdp"
 ```
