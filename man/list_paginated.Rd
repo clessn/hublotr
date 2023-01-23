@@ -10,6 +10,8 @@ list_paginated(path, credentials, cursor = NULL)
 \item{path}{The path to the API endpoint, excluding the hub URL (and not starting with a forward slash).}
 
 \item{credentials}{A credentials object to authenticate with.}
+
+\item{cursor}{Optional. The cursor to use for pagination. Defaults to NULL}
 }
 \description{
 Get the first set of a paginated list of elements and the information to get the following pages.

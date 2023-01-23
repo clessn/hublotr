@@ -1,8 +1,10 @@
 #' Generate a credentials object to pass to this package's functions in order to authenticate to the API.
 #' If either the username or password are not specified, they will be asked interactively.
+#'
 #' @param hub_url The URL of the hub to authenticate to. Must end with a forward slash.
 #' @param username Optional. The username to authenticate with.
 #' @param password Opional. The password to authenticate with.
+#'
 #' @export
 get_credentials <- function(hub_url, username = NULL, password = NULL) {
     if (username == "" || is.null(username)) {
@@ -226,7 +228,7 @@ list_ <- function(path, credentials) {
 #' Get the first set of a paginated list of elements and the information to get the following pages.
 #' @param path The path to the API endpoint, excluding the hub URL (and not starting with a forward slash).
 #' @param credentials A credentials object to authenticate with.
-#' @cursor Optional. The cursor to use for pagination. Defaults to NULL
+#' @param cursor Optional. The cursor to use for pagination. Defaults to NULL
 #' @export
 list_paginated <- function(path, credentials, cursor = NULL) {
     orig_path <- path
