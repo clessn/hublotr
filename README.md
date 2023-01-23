@@ -16,7 +16,7 @@ devtools::install_github("clessn/hublotr")
 2. Ajouter les lignes suivantes dans .Renviron:
 ```
 # .Renviron
-HUB3_URL      = "https://hublot.clessn.cloud/admin/"
+HUB3_URL      = "https://hublot.clessn.cloud/"
 HUB3_USERNAME = "mon.nom.usager"
 HUB3_PASSWORD = "mon.mdp"
 ```
@@ -36,19 +36,35 @@ credentials <- hublot::get_credentials(
 
 ## Snippets
 
-```R
-# valider si nous avons la dernière version, sinon lève une erreur
-hublot::check_version()
-# alternativement, on peut faire hublot::check_version(warn_only = T) pour simplement lever un avertissement
+### Valider si nous avons la dernière version
 
-# entrer ses informations de login, qu'on stocke dans un objet "credentials"
+```R
+# Valider si nous avons la dernière version, sinon lève une erreur
+hublot::check_version()
+
+# Pour simplement lever un avertissement
+hublot::check_version(warn_only = T)
+```
+
+### Entrer ses informations de login
+
+Entrer ses informations de login, qu'on stocke dans un objet "credentials":
+
+```R
 credentials <- hublot::get_credentials("https://clhub.clessn.cloud/")
-# on nous demandera notre username et password en ligne de commande ou dans une fenêtre si sur RStudio
-# Alternativement, on peut passer les valeurs directement:
-# NE PAS LAISSER VOTRE NOM D'UTILISATEUR OU MOT DE PASSE DANS UN PROJET GIT
+```
+On nous demandera notre username et password en ligne de commande ou dans une fenêtre si sur RStudio. Alternativement, on peut passer les valeurs directement:
+
+N.B.: NE PAS LAISSER VOTRE NOM D'UTILISATEUR OU MOT DE PASSE DANS UN PROJET GIT)
+
+```R
 credentials <- hublot::get_credentials("https://clhub.clessn.cloud/", "admin", "motdepasse")
-# c'est utile si les informations de connexion sont dans une variable d'environnement, qu'on peut alors récupérer comme suit: username <- Sys.getenv("hublot_USERNAME")
-# UN MAUVAIS NOM D'UTILISATEUR OU DE MOT DE PASSE NE SERA PAS RAPPORTÉ AVANT UNE PREMIÈRE UTILISATION DE FONCTION
+```
+N.B.: UN MAUVAIS NOM D'UTILISATEUR OU DE MOT DE PASSE NE SERA PAS RAPPORTÉ AVANT UNE PREMIÈRE UTILISATION DE FONCTION.
+
+C'est utile si les informations de connexion sont dans une variable d'environnement, qu'on peut alors récupérer comme suit: 
+```R
+username <- Sys.getenv("hublot_USERNAME")
 ```
 
 ### Les fonctions
