@@ -1,7 +1,7 @@
 Package: hublot
 Type: Package
 Title: Package d'accès à hublot
-Version: 1.5.0
+Version: 1.5.1
 Author: Olivier Banville <oli.banville@gmail.com>
 Maintainer: Olivier Banville <oli.banville@gmail.com>
 Description: Package d'accès à hublot
