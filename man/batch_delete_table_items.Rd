@@ -2,10 +2,13 @@
 % Please edit documentation in R/v1.R
 \name{batch_delete_table_items}
 \alias{batch_delete_table_items}
-\title{The body must be a list of ids (not keys)}
+\title{Batch delete table items}
 \usage{
 batch_delete_table_items(table_name, body, credentials)
 }
+\arguments{
+\item{body}{List of ids (not keys).}
+}
 \description{
-The body must be a list of ids (not keys)
+Batch delete table items
 }
