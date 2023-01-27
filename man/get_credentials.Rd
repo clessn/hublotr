@@ -2,7 +2,7 @@
 % Please edit documentation in R/util.R
 \name{get_credentials}
 \alias{get_credentials}
-\title{Generate a credentials object to pass to this package's functions in order to authenticate to the API.}
+\title{Generate a credentials object to authenticate to the API}
 \usage{
 get_credentials(hub_url, username = NULL, password = NULL)
 }
@@ -14,5 +14,7 @@ get_credentials(hub_url, username = NULL, password = NULL)
 \item{password}{Opional. The password to authenticate with.}
 }
 \description{
-If either the username or password are not specified, they will be asked interactively.
+Generate a credentials object to pass to this package's functions in order to
+ authenticate to the API. If either the username or password are not
+ specified, they will be asked interactively.
 }

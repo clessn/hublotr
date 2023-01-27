@@ -7,5 +7,5 @@
 filter(path, body, credentials, cursor = NULL)
 }
 \description{
-Only applies to dynamic table objects
+Only applies to dynamic table objects.
 }

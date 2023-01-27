@@ -1,6 +1,8 @@
-#' Generate a credentials object to pass to this package's functions in order to authenticate to the API.
+#' Generate a credentials object to authenticate to the API
 #'
-#' If either the username or password are not specified, they will be asked interactively.
+#' Generate a credentials object to pass to this package's functions in order to
+#'  authenticate to the API. If either the username or password are not
+#'  specified, they will be asked interactively.
 #'
 #' @param hub_url The URL of the hub to authenticate to. Must end with a forward slash.
 #' @param username Optional. The username to authenticate with.
@@ -26,6 +28,7 @@ get_credentials <- function(hub_url, username = NULL, password = NULL) {
 #' Create an empty credentials object
 #'
 #' Useful for internal use or alternative login methods. This is generally not useful for general users.
+#'
 #' @param hub_url The URL of the hub to authenticate to. Must end with a forward slash.
 #' @keywords internal
 #' @export
@@ -329,7 +332,7 @@ remove <- function(path, credentials) {
 
 #' Filter dynamic table objects
 #'
-#' Only applies to dynamic table objects
+#' Only applies to dynamic table objects.
 #' @export
 filter <- function(path, body, credentials, cursor = NULL) {
   orig_path <- path
