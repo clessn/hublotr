@@ -5,7 +5,7 @@ Version: 1.6.0
 Author: Olivier Banville <oli.banville@gmail.com>
 Maintainer: Olivier Banville <oli.banville@gmail.com>
 Description: Package d'accès à hublot
-License:
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
