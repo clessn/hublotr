@@ -377,7 +377,7 @@ handle_response <- function(response, path, expected) {
     return(httr::content(response))
 }
 
-
+#' @importFrom readr read_lines
 #' @export
 check_version <- function(warn_only = F) {
     current_version <- packageVersion("hublot")
