@@ -2,7 +2,7 @@
 % Please edit documentation in R/util.R
 \name{list_}
 \alias{list_}
-\title{List all elements of a specific endpoint.}
+\title{List all elements of a specific endpoint}
 \usage{
 list_(path, credentials)
 }
@@ -15,5 +15,5 @@ list_(path, credentials)
 depends on the endpoint. Usually a named list with a "results" key containing a list of elements, or a list of elements.
 }
 \description{
-Note that the underscore is to prevent the fuction for overwriting the base list() function
+The underscore is to prevent the function for overwriting the base list() function
 }

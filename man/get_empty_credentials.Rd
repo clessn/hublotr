@@ -2,7 +2,7 @@
 % Please edit documentation in R/util.R
 \name{get_empty_credentials}
 \alias{get_empty_credentials}
-\title{Create an empty credentials object. Useful for internal use or alternative login methods.}
+\title{Create an empty credentials object}
 \usage{
 get_empty_credentials(hub_url)
 }
@@ -10,5 +10,6 @@ get_empty_credentials(hub_url)
 \item{hub_url}{The URL of the hub to authenticate to. Must end with a forward slash.}
 }
 \description{
-This is generally not useful for general users.
+Useful for internal use or alternative login methods. This is generally not useful for general users.
 }
+\keyword{internal}
