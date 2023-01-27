@@ -1,4 +1,5 @@
 #' Generate a credentials object to pass to this package's functions in order to authenticate to the API.
+#'
 #' If either the username or password are not specified, they will be asked interactively.
 #'
 #' @param hub_url The URL of the hub to authenticate to. Must end with a forward slash.
@@ -134,6 +135,7 @@ form_post <- function(path, body, credentials = NULL, verify = T, timeout = 30) 
 }
 
 #' Call an API using the DELETE method
+#'
 #' @param path The path to the API endpoint, excluding the hub URL (and not starting with a forward slash).
 #' @param credentials A credentials object to authenticate with.
 #' @param verify Optional. Whether to verify the SSL certificate of the API. Defaults to TRUE.
@@ -161,6 +163,7 @@ delete <- function(path, credentials = NULL, verify = T, timeout = 30) {
 }
 
 #' Call an API using the PATCH method
+#'
 #' @param path The path to the API endpoint, excluding the hub URL (and not starting with a forward slash).
 #' @param body The body of the request as json data (use `jsonlite::toJSON(body, auto_unbox=T)`).
 #' @param credentials A credentials object to authenticate with.
@@ -188,6 +191,7 @@ patch <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
 }
 
 #' Call an API using the OPTIONS method
+#'
 #' @param path The path to the API endpoint, excluding the hub URL (and not starting with a forward slash).
 #' @param credentials A credentials object to authenticate with.
 #' @param verify Optional. Whether to verify the SSL certificate of the API. Defaults to TRUE.
@@ -218,7 +222,9 @@ options <- function(path, credentials = NULL, verify = T, timeout = 30) {
 # CRUD VERBS
 
 #' List all elements of a specific endpoint.
+#'
 #' Note that the underscore is to prevent the fuction for overwriting the base list() function
+#'
 #' @param path The path to the API endpoint, excluding the hub URL (and not starting with a forward slash).
 #' @param credentials A credentials object to authenticate with.
 #' @return depends on the endpoint. Usually a named list with a "results" key containing a list of elements, or a list of elements.
@@ -230,6 +236,7 @@ list_ <- function(path, credentials) {
 }
 
 #' Get the first set of a paginated list of elements and the information to get the following pages.
+#'
 #' @param path The path to the API endpoint, excluding the hub URL (and not starting with a forward slash).
 #' @param credentials A credentials object to authenticate with.
 #' @param cursor Optional. The cursor to use for pagination. Defaults to NULL
