@@ -97,8 +97,8 @@ remove_table_item <- function(table_name, id, credentials) {
     return(hublot::remove(path, credentials))
 }
 
-#' @export
 #' The body must be a list of json elements
+#' @export
 batch_create_table_items <- function(table_name, body, credentials) {
     path <- paste0("api/v1/", table_name, "/batch_create/")
     response <- hublot::post(path, body, credentials)
@@ -106,8 +106,8 @@ batch_create_table_items <- function(table_name, body, credentials) {
     return(result)
 }
 
-#' @export
 #' The body must be a list of ids (not keys)
+#' @export
 batch_delete_table_items <- function(table_name, body, credentials) {
     path <- paste0("api/v1/", table_name, "/batch_delete/")
     response <- hublot::post(path, body, credentials)
