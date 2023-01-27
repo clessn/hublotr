@@ -384,14 +384,14 @@ check_version <- function(warn_only = F) {
     online_version <- NULL
     tryCatch(
         {
-            online_version <- stringr::str_split(readr::read_lines("https://raw.githubusercontent.com/clessn/hublot/master/DESCRIPTION")[[4]], ": ")[[1]][[2]]
+            online_version <- stringr::str_split(readr::read_lines("https://raw.githubusercontent.com/clessn/hublotr/master/DESCRIPTION")[[4]], ": ")[[1]][[2]]
         },
         error = function(e) {
             warning("could not check for updates")
         }
     )
 
-    online_version <- stringr::str_split(readr::read_lines("https://raw.githubusercontent.com/clessn/hublot/master/DESCRIPTION")[[4]], ": ")[[1]][[2]]
+    online_version <- stringr::str_split(readr::read_lines("https://raw.githubusercontent.com/clessn/hublotr/master/DESCRIPTION")[[4]], ": ")[[1]][[2]]
 
     if (current_version != online_version) {
         if (warn_only) {
