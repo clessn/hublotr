@@ -2,10 +2,10 @@
 % Please edit documentation in R/util.R
 \name{filter}
 \alias{filter}
-\title{only applies to dynamic table objects}
+\title{Filter dynamic table objects}
 \usage{
 filter(path, body, credentials, cursor = NULL)
 }
 \description{
-only applies to dynamic table objects
+Only applies to dynamic table objects
 }

@@ -259,6 +259,8 @@ list_paginated <- function(path, credentials, cursor = NULL) {
   return(result)
 }
 
+#' List next results
+#'
 #' @export
 list_next <- function(last_result, credentials) {
   if (!is.null(last_result$"next")) {
@@ -268,6 +270,8 @@ list_next <- function(last_result, credentials) {
   }
 }
 
+#' List previous results
+#'
 #' @export
 list_previous <- function(last_result, credentials) {
   if (!is.null(last_result$"previous")) {
@@ -277,7 +281,8 @@ list_previous <- function(last_result, credentials) {
   }
 }
 
-
+#' Create
+#'
 #' @export
 create <- function(path, body, credentials) {
   response <- hublot::post(path, body, credentials)
@@ -285,6 +290,8 @@ create <- function(path, body, credentials) {
   return(result)
 }
 
+#' Form create
+#'
 #' @export
 form_create <- function(path, body, credentials) {
   response <- hublot::form_post(path, body, credentials)
@@ -292,6 +299,8 @@ form_create <- function(path, body, credentials) {
   return(result)
 }
 
+#' Retrieve
+#'
 #' @export
 retrieve <- function(path, credentials) {
   response <- hublot::get(path, NULL, credentials)
@@ -299,6 +308,8 @@ retrieve <- function(path, credentials) {
   return(result)
 }
 
+#' Update
+#'
 #' @export
 update <- function(path, body, credentials) {
   response <- hublot::patch(path, body, credentials)
@@ -306,6 +317,8 @@ update <- function(path, body, credentials) {
   return(result)
 }
 
+#' Remove
+#'
 #' @export
 remove <- function(path, credentials) {
   response <- hublot::delete(path, credentials)
@@ -313,7 +326,9 @@ remove <- function(path, credentials) {
   return(result)
 }
 
-#' only applies to dynamic table objects
+#' Filter dynamic table objects
+#'
+#' Only applies to dynamic table objects
 #' @export
 filter <- function(path, body, credentials, cursor = NULL) {
   orig_path <- path
@@ -338,6 +353,8 @@ filter <- function(path, body, credentials, cursor = NULL) {
   return(result)
 }
 
+#' Filter next
+#'
 #' @export
 filter_next <- function(last_result, credentials) {
   if (!is.null(last_result$"next")) {
@@ -347,6 +364,8 @@ filter_next <- function(last_result, credentials) {
   }
 }
 
+#' Filter previous
+#'
 #' @export
 filter_previous <- function(last_result, credentials) {
   if (!is.null(last_result$"previous")) {
@@ -388,7 +407,8 @@ handle_response <- function(response, path, expected) {
   return(httr::content(response))
 }
 
-
+#' Check if package version is up to date
+#'
 #' @export
 check_version <- function(warn_only = F) {
   current_version <- packageVersion("hublot")
