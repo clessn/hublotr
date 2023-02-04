@@ -14,5 +14,4 @@ Imports: getPass,
     jsonlite,
     openssl,
     readr,
-    stringr,
-    tidyjson
+    stringr
