@@ -1,4 +1,7 @@
 # hublot
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/clessn/hublotr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/clessn/hublotr/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
 Package d'accès à clHub.
 
