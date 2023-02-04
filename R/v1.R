@@ -91,7 +91,7 @@ filter_table_items <- function(table_name, credentials, filter) {
 #' @export
 count_table_items <- function(table_name, credentials, filter = NULL) {
   path <- paste0("api/v1/", table_name, "/")
-  return(hublot::count(path, filter, credentials))
+  return(count(path, filter, credentials))
 }
 
 #' Add table item
