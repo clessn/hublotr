@@ -414,6 +414,7 @@ handle_response <- function(response, path, expected) {
 #' Check if package version is up to date
 #'
 #' @importFrom readr read_lines
+#' @importFrom stringr str_split
 #' @export
 check_version <- function(warn_only = F) {
   current_version <- utils::packageVersion("hublot")
