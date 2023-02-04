@@ -137,7 +137,6 @@ batch_create_table_items <- function(table_name, body, credentials) {
 #' Batch delete table items
 #'
 #' @param body List of ids (not keys).
-#'
 #' @export
 batch_delete_table_items <- function(table_name, body, credentials) {
   path <- paste0("api/v1/", table_name, "/batch_delete/")

@@ -2,6 +2,7 @@
 % Please edit documentation in R/v1.R
 \name{batch_create_table_items}
 \alias{batch_create_table_items}
+
 \title{Batch create table items}
 \usage{
 batch_create_table_items(table_name, body, credentials)
