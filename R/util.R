@@ -235,7 +235,7 @@ options <- function(path, credentials = NULL, verify = T, timeout = 30) {
 #' @export
 list_ <- function(path, credentials) {
   response <- hublot::get(path, credentials = credentials)
-  result <- hublot::handle_response(response, path, 200)
+  result <- handle_response(response, path, 200)
   return(result)
 }
 
@@ -251,7 +251,7 @@ list_paginated <- function(path, credentials, cursor = NULL) {
     path <- paste0(path, "?", cursor)
   }
   response <- hublot::get(path, credentials = credentials)
-  result <- hublot::handle_response(response, path, 200)
+  result <- handle_response(response, path, 200)
   result$path <- orig_path
 
   if (!is.null(result$"next")) {
@@ -290,7 +290,7 @@ list_previous <- function(last_result, credentials) {
 #' @export
 create <- function(path, body, credentials) {
   response <- hublot::post(path, body, credentials)
-  result <- hublot::handle_response(response, path, 201)
+  result <- handle_response(response, path, 201)
   return(result)
 }
 
@@ -299,7 +299,7 @@ create <- function(path, body, credentials) {
 #' @export
 form_create <- function(path, body, credentials) {
   response <- hublot::form_post(path, body, credentials)
-  result <- hublot::handle_response(response, path, 201)
+  result <- handle_response(response, path, 201)
   return(result)
 }
 
@@ -308,7 +308,7 @@ form_create <- function(path, body, credentials) {
 #' @export
 retrieve <- function(path, credentials) {
   response <- hublot::get(path, NULL, credentials)
-  result <- hublot::handle_response(response, path, 200)
+  result <- handle_response(response, path, 200)
   return(result)
 }
 
@@ -317,7 +317,7 @@ retrieve <- function(path, credentials) {
 #' @export
 update <- function(path, body, credentials) {
   response <- hublot::patch(path, body, credentials)
-  result <- hublot::handle_response(response, path, 200)
+  result <- handle_response(response, path, 200)
   return(result)
 }
 
@@ -326,7 +326,7 @@ update <- function(path, body, credentials) {
 #' @export
 remove <- function(path, credentials) {
   response <- hublot::delete(path, credentials)
-  result <- hublot::handle_response(response, path, 204)
+  result <- handle_response(response, path, 204)
   return(result)
 }
 
@@ -341,7 +341,7 @@ filter <- function(path, body, credentials, cursor = NULL) {
     path <- paste0(path, "?", cursor)
   }
   response <- hublot::post(path, body, credentials = credentials)
-  result <- hublot::handle_response(response, path, 200)
+  result <- handle_response(response, path, 200)
   if (is.null(names(result))) {
     result <- list(results = result)
   }
@@ -386,7 +386,7 @@ count <- function(path, filter, credentials) {
   } else {
     response <- hublot::post(path, body = filter, credentials = credentials)
   }
-  result <- hublot::handle_response(response, path, 200)
+  result <- handle_response(response, path, 200)
   return(result)
 }
 
