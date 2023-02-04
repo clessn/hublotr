@@ -130,7 +130,7 @@ remove_table_item <- function(table_name, id, credentials) {
 batch_create_table_items <- function(table_name, body, credentials) {
   path <- paste0("api/v1/", table_name, "/batch_create/")
   response <- hublot::post(path, body, credentials)
-  result <- hublot::handle_response(response, path, 200)
+  result <- handle_response(response, path, 200)
   return(result)
 }
 
@@ -141,7 +141,7 @@ batch_create_table_items <- function(table_name, body, credentials) {
 batch_delete_table_items <- function(table_name, body, credentials) {
   path <- paste0("api/v1/", table_name, "/batch_delete/")
   response <- hublot::post(path, body, credentials)
-  result <- hublot::handle_response(response, path, 200)
+  result <- handle_response(response, path, 200)
   return(result)
 }
 
