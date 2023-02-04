@@ -1,10 +1,10 @@
 Package: hublot
 Type: Package
 Title: Package d'accès à hublot
-Version: 1.6.2
+Version: 1.6.3
 Author: Olivier Banville <oli.banville@gmail.com>
 Maintainer: Olivier Banville <oli.banville@gmail.com>
-Description: Package d'accès à hublot
+Description: Package d'accès à hublot.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
