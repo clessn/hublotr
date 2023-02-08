@@ -181,6 +181,7 @@ filter_lake_items <- function(credentials, filter) {
 }
 #' Retrieve lake item
 #'
+#' @inheritParams retrieve
 #' @export
 retrieve_lake_item <- function(id, credentials) {
   path <- paste0("api/v1/lake/", id, "/")
