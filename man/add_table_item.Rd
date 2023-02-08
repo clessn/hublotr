@@ -6,6 +6,11 @@
 \usage{
 add_table_item(table_name, body, credentials)
 }
+\arguments{
+\item{body}{The body of the request, as a named list.}
+
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 Add table item
 }

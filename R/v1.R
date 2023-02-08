@@ -106,6 +106,7 @@ count_table_items <- function(table_name, credentials, filter = NULL) {
 
 #' Add table item
 #'
+#' @inheritParams create
 #' @export
 add_table_item <- function(table_name, body, credentials) {
   path <- paste0("api/v1/", table_name, "/")
