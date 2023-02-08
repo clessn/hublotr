@@ -6,6 +6,9 @@
 \usage{
 filter_table_items(table_name, credentials, filter)
 }
+\arguments{
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 Filter table items
 }

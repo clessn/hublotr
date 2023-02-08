@@ -90,6 +90,7 @@ list_table_items <- function(table_name, credentials, cursor = NULL) {
 }
 #' Filter table items
 #'
+#' @inheritParams filter
 #' @export
 filter_table_items <- function(table_name, credentials, filter) {
   path <- paste0("api/v1/", table_name, "/")
