@@ -172,6 +172,7 @@ delete <- function(path, credentials = NULL, verify = T, timeout = 30) {
 #' @param body The body of the request as json data (use `jsonlite::toJSON(body, auto_unbox=T)`).
 #' @param credentials A credentials object to authenticate with.
 #' @param verify Optional. Whether to verify the SSL certificate of the API. Defaults to TRUE.
+#' @param timeout Optional. The timeout in seconds to wait for a response. Defaults to 30.
 #' @export
 patch <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
   if (is.null(credentials)) {

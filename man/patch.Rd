@@ -14,6 +14,8 @@ patch(path, body, credentials = NULL, verify = T, timeout = 30)
 \item{credentials}{A credentials object to authenticate with.}
 
 \item{verify}{Optional. Whether to verify the SSL certificate of the API. Defaults to TRUE.}
+
+\item{timeout}{Optional. The timeout in seconds to wait for a response. Defaults to 30.}
 }
 \description{
 Call an API using the PATCH method
