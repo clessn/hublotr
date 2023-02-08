@@ -6,6 +6,13 @@
 \usage{
 form_create(path, body, credentials)
 }
+\arguments{
+\item{path}{The path to the API endpoint, excluding the hub URL (and not starting with a forward slash).}
+
+\item{body}{The body of the request as json data (use `jsonlite::toJSON(body, auto_unbox=T)`).}
+
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 Form create
 }

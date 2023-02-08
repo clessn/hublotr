@@ -300,6 +300,7 @@ create <- function(path, body, credentials) {
 
 #' Form create
 #'
+#' @inheritParams form_post
 #' @export
 form_create <- function(path, body, credentials) {
   response <- hublot::form_post(path, body, credentials)
