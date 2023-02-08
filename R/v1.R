@@ -114,6 +114,7 @@ add_table_item <- function(table_name, body, credentials) {
 }
 #' Retrieve table item
 #'
+#' @inheritParams retrieve
 #' @export
 retrieve_table_item <- function(table_name, id, credentials) {
   path <- paste0("api/v1/", table_name, "/", id, "/")
