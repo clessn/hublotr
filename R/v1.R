@@ -122,6 +122,7 @@ retrieve_table_item <- function(table_name, id, credentials) {
 }
 #' Update table item
 #'
+#' @inheritParams update
 #' @export
 update_table_item <- function(table_name, id, body, credentials) {
   path <- paste0("api/v1/", table_name, "/", id, "/")
