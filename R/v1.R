@@ -65,6 +65,8 @@ retrieve_journal <- function(id, credentials) {
 # tables
 
 #' List tables
+#'
+#' @inheritParams list_
 #' @export
 list_tables <- function(credentials) {
   path <- "api/v1/dynamic_tables/"

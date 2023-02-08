@@ -6,6 +6,9 @@
 \usage{
 list_tables(credentials)
 }
+\arguments{
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 List tables
 }
