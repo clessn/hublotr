@@ -6,6 +6,9 @@
 \usage{
 list_logs(credentials)
 }
+\arguments{
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 List logs
 }

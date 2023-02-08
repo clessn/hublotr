@@ -23,6 +23,7 @@ log <- function(app_id, level, message, url) {
 
 #' List logs
 #'
+#' @inheritParams list_
 #' @export
 list_logs <- function(credentials) {
   path <- "api/v1/logs/"
