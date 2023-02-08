@@ -417,7 +417,7 @@ handle_response <- function(response, path, expected) {
 #' @importFrom readr read_lines
 #' @importFrom stringr str_split
 #' @export
-check_version <- function(warn_only = F) {
+check_version <- function(warn_only = FALSE) {
   current_version <- utils::packageVersion("hublot")
   online_version <- NULL
   tryCatch(
