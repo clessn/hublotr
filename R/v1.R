@@ -82,6 +82,7 @@ filter_tables <- function(credentials, filter) {
 }
 #' List table items
 #'
+#' @inheritParams list_paginated
 #' @export
 list_table_items <- function(table_name, credentials, cursor = NULL) {
   path <- paste0("api/v1/", table_name, "/")
