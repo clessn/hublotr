@@ -196,6 +196,7 @@ add_lake_item <- function(body, credentials) {
 }
 #' Update lake item
 #'
+#' @inheritParams update
 #' @export
 update_lake_item <- function(id, body, credentials) {
   path <- paste0("api/v1/lake/", id, "/")
