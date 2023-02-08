@@ -6,6 +6,9 @@
 \usage{
 retrieve_journal(id, credentials)
 }
+\arguments{
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 Retrieve journal
 }

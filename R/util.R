@@ -172,6 +172,7 @@ delete <- function(path, credentials = NULL, verify = T, timeout = 30) {
 #' @param body The body of the request as json data (use `jsonlite::toJSON(body, auto_unbox=T)`).
 #' @param credentials A credentials object to authenticate with.
 #' @param verify Optional. Whether to verify the SSL certificate of the API. Defaults to TRUE.
+#' @param timeout Optional. The timeout in seconds to wait for a response. Defaults to 30.
 #' @export
 patch <- function(path, body, credentials = NULL, verify = T, timeout = 30) {
   if (is.null(credentials)) {
@@ -265,6 +266,8 @@ list_paginated <- function(path, credentials, cursor = NULL) {
 
 #' List next results
 #'
+#' @param last_result Last result.
+#' @param credentials A credentials object to authenticate with.
 #' @export
 list_next <- function(last_result, credentials) {
   if (!is.null(last_result$"next")) {
@@ -276,6 +279,7 @@ list_next <- function(last_result, credentials) {
 
 #' List previous results
 #'
+#' @inheritParams list_next
 #' @export
 list_previous <- function(last_result, credentials) {
   if (!is.null(last_result$"previous")) {
@@ -287,6 +291,7 @@ list_previous <- function(last_result, credentials) {
 
 #' Create
 #'
+#' @inheritParams post
 #' @export
 create <- function(path, body, credentials) {
   response <- hublot::post(path, body, credentials)
@@ -296,6 +301,7 @@ create <- function(path, body, credentials) {
 
 #' Form create
 #'
+#' @inheritParams form_post
 #' @export
 form_create <- function(path, body, credentials) {
   response <- hublot::form_post(path, body, credentials)
@@ -305,6 +311,7 @@ form_create <- function(path, body, credentials) {
 
 #' Retrieve
 #'
+#' @inheritParams get
 #' @export
 retrieve <- function(path, credentials) {
   response <- hublot::get(path, NULL, credentials)
@@ -314,6 +321,7 @@ retrieve <- function(path, credentials) {
 
 #' Update
 #'
+#' @inheritParams patch
 #' @export
 update <- function(path, body, credentials) {
   response <- hublot::patch(path, body, credentials)
@@ -323,6 +331,7 @@ update <- function(path, body, credentials) {
 
 #' Remove
 #'
+#' @inheritParams delete
 #' @export
 remove <- function(path, credentials) {
   response <- hublot::delete(path, credentials)
@@ -333,6 +342,9 @@ remove <- function(path, credentials) {
 #' Filter dynamic table objects
 #'
 #' Only applies to dynamic table objects.
+#'
+#' @inheritParams post
+#' @inheritParams list_paginated
 #' @export
 filter <- function(path, body, credentials, cursor = NULL) {
   orig_path <- path
@@ -359,6 +371,7 @@ filter <- function(path, body, credentials, cursor = NULL) {
 
 #' Filter next
 #'
+#' @inheritParams list_next
 #' @export
 filter_next <- function(last_result, credentials) {
   if (!is.null(last_result$"next")) {
@@ -370,6 +383,7 @@ filter_next <- function(last_result, credentials) {
 
 #' Filter previous
 #'
+#' @inheritParams list_next
 #' @export
 filter_previous <- function(last_result, credentials) {
   if (!is.null(last_result$"previous")) {

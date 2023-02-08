@@ -6,6 +6,9 @@
 \usage{
 remove_table_item(table_name, id, credentials)
 }
+\arguments{
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 Remove table item
 }

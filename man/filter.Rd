@@ -6,6 +6,15 @@
 \usage{
 filter(path, body, credentials, cursor = NULL)
 }
+\arguments{
+\item{path}{The path to the API endpoint, excluding the hub URL (and not starting with a forward slash).}
+
+\item{body}{The body of the request, as a named list.}
+
+\item{credentials}{A credentials object to authenticate with.}
+
+\item{cursor}{Optional. The cursor to use for pagination. Defaults to NULL}
+}
 \description{
 Only applies to dynamic table objects.
 }

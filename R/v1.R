@@ -23,6 +23,7 @@ log <- function(app_id, level, message, url) {
 
 #' List logs
 #'
+#' @inheritParams list_
 #' @export
 list_logs <- function(credentials) {
   path <- "api/v1/logs/"
@@ -34,6 +35,7 @@ filter_logs <- function(credentials, filter) {
 }
 #' Retrieve logs
 #'
+#' @inheritParams retrieve
 #' @export
 retrieve_log <- function(id, credentials) {
   path <- paste0("api/v1/", id, "/")
@@ -41,6 +43,7 @@ retrieve_log <- function(id, credentials) {
 }
 #' List journals
 #'
+#' @inheritParams list_
 #' @export
 list_journals <- function(credentials) {
   path <- "api/v1/journals/"
@@ -52,6 +55,7 @@ filter_journals <- function(credentials, filter) {
 }
 #' Retrieve journal
 #'
+#' @inheritParams retrieve
 #' @export
 retrieve_journal <- function(id, credentials) {
   path <- paste0("api/v1/", id, "/")
@@ -61,12 +65,16 @@ retrieve_journal <- function(id, credentials) {
 # tables
 
 #' List tables
+#'
+#' @inheritParams list_
 #' @export
 list_tables <- function(credentials) {
   path <- "api/v1/dynamic_tables/"
   return(hublot::list_(path, credentials))
 }
 #' Filter tables
+#'
+#' @inheritParams filter
 #' @export
 filter_tables <- function(credentials, filter) {
   path <- "api/v1/dynamic_tables/"
@@ -74,6 +82,7 @@ filter_tables <- function(credentials, filter) {
 }
 #' List table items
 #'
+#' @inheritParams list_paginated
 #' @export
 list_table_items <- function(table_name, credentials, cursor = NULL) {
   path <- paste0("api/v1/", table_name, "/")
@@ -81,6 +90,7 @@ list_table_items <- function(table_name, credentials, cursor = NULL) {
 }
 #' Filter table items
 #'
+#' @inheritParams filter
 #' @export
 filter_table_items <- function(table_name, credentials, filter) {
   path <- paste0("api/v1/", table_name, "/")
@@ -96,6 +106,7 @@ count_table_items <- function(table_name, credentials, filter = NULL) {
 
 #' Add table item
 #'
+#' @inheritParams create
 #' @export
 add_table_item <- function(table_name, body, credentials) {
   path <- paste0("api/v1/", table_name, "/")
@@ -103,6 +114,7 @@ add_table_item <- function(table_name, body, credentials) {
 }
 #' Retrieve table item
 #'
+#' @inheritParams retrieve
 #' @export
 retrieve_table_item <- function(table_name, id, credentials) {
   path <- paste0("api/v1/", table_name, "/", id, "/")
@@ -110,6 +122,7 @@ retrieve_table_item <- function(table_name, id, credentials) {
 }
 #' Update table item
 #'
+#' @inheritParams update
 #' @export
 update_table_item <- function(table_name, id, body, credentials) {
   path <- paste0("api/v1/", table_name, "/", id, "/")
@@ -117,6 +130,7 @@ update_table_item <- function(table_name, id, body, credentials) {
 }
 #' Remove table item
 #'
+#' @inheritParams remove
 #' @export
 remove_table_item <- function(table_name, id, credentials) {
   path <- paste0("api/v1/", table_name, "/", id, "/")
@@ -126,6 +140,7 @@ remove_table_item <- function(table_name, id, credentials) {
 #' Batch create table items
 #'
 #' @param body List of json elements.
+#' @inheritParams post
 #' @export
 batch_create_table_items <- function(table_name, body, credentials) {
   path <- paste0("api/v1/", table_name, "/batch_create/")
@@ -137,6 +152,7 @@ batch_create_table_items <- function(table_name, body, credentials) {
 #' Batch delete table items
 #'
 #' @param body List of ids (not keys).
+#' @inheritParams post
 #' @export
 batch_delete_table_items <- function(table_name, body, credentials) {
   path <- paste0("api/v1/", table_name, "/batch_delete/")
@@ -149,6 +165,7 @@ batch_delete_table_items <- function(table_name, body, credentials) {
 
 #' List lake items
 #'
+#' @inheritParams list_
 #' @export
 list_lake_items <- function(credentials) {
   path <- "api/v1/lake/"
@@ -156,6 +173,7 @@ list_lake_items <- function(credentials) {
 }
 #' Filter lake items
 #'
+#' @inheritParams filter
 #' @export
 filter_lake_items <- function(credentials, filter) {
   path <- "api/v1/lake/"
@@ -163,6 +181,7 @@ filter_lake_items <- function(credentials, filter) {
 }
 #' Retrieve lake item
 #'
+#' @inheritParams retrieve
 #' @export
 retrieve_lake_item <- function(id, credentials) {
   path <- paste0("api/v1/lake/", id, "/")
@@ -170,6 +189,7 @@ retrieve_lake_item <- function(id, credentials) {
 }
 #' Add lake item
 #'
+#' @inheritParams form_create
 #' @export
 add_lake_item <- function(body, credentials) {
   path <- "api/v1/lake/"
@@ -177,6 +197,7 @@ add_lake_item <- function(body, credentials) {
 }
 #' Update lake item
 #'
+#' @inheritParams update
 #' @export
 update_lake_item <- function(id, body, credentials) {
   path <- paste0("api/v1/lake/", id, "/")
@@ -184,6 +205,7 @@ update_lake_item <- function(id, body, credentials) {
 }
 #' Remove lake item
 #'
+#' @inheritParams remove
 #' @export
 remove_lake_item <- function(id, credentials) {
   path <- paste0("api/v1/lake/", id, "/")
@@ -232,12 +254,16 @@ remove_tag <- function(id, credentials) {
 # files
 
 #' List files
+#'
+#' @inheritParams list_
 #' @export
 list_files <- function(credentials) {
   path <- "api/v1/files/"
   return(hublot::list_(path, credentials))
 }
 #' Filter files
+#'
+#' @inheritParams filter
 #' @export
 filter_files <- function(credentials, filter) {
   path <- "api/v1/files/"
@@ -245,6 +271,7 @@ filter_files <- function(credentials, filter) {
 }
 #' Retrieve file
 #'
+#' @inheritParams retrieve
 #' @export
 retrieve_file <- function(id, credentials) {
   path <- paste0("api/v1/files/", id, "/")

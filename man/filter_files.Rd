@@ -6,6 +6,9 @@
 \usage{
 filter_files(credentials, filter)
 }
+\arguments{
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 Filter files
 }

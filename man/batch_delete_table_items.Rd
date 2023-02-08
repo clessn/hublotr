@@ -8,6 +8,8 @@ batch_delete_table_items(table_name, body, credentials)
 }
 \arguments{
 \item{body}{List of ids (not keys).}
+
+\item{credentials}{A credentials object to authenticate with.}
 }
 \description{
 Batch delete table items

@@ -6,6 +6,11 @@
 \usage{
 list_table_items(table_name, credentials, cursor = NULL)
 }
+\arguments{
+\item{credentials}{A credentials object to authenticate with.}
+
+\item{cursor}{Optional. The cursor to use for pagination. Defaults to NULL}
+}
 \description{
 List table items
 }

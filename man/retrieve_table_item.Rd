@@ -6,6 +6,9 @@
 \usage{
 retrieve_table_item(table_name, id, credentials)
 }
+\arguments{
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 Retrieve table item
 }

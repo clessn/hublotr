@@ -6,6 +6,11 @@
 \usage{
 filter_previous(last_result, credentials)
 }
+\arguments{
+\item{last_result}{Last result.}
+
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 Filter previous
 }

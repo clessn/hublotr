@@ -6,6 +6,11 @@
 \usage{
 update_table_item(table_name, id, body, credentials)
 }
+\arguments{
+\item{body}{The body of the request as json data (use `jsonlite::toJSON(body, auto_unbox=T)`).}
+
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 Update table item
 }
