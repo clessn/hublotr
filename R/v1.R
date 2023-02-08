@@ -35,6 +35,7 @@ filter_logs <- function(credentials, filter) {
 }
 #' Retrieve logs
 #'
+#' @inheritParams retrieve
 #' @export
 retrieve_log <- function(id, credentials) {
   path <- paste0("api/v1/", id, "/")

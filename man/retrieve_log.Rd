@@ -6,6 +6,9 @@
 \usage{
 retrieve_log(id, credentials)
 }
+\arguments{
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 Retrieve logs
 }
