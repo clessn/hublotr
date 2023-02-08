@@ -55,6 +55,7 @@ filter_journals <- function(credentials, filter) {
 }
 #' Retrieve journal
 #'
+#' @inheritParams retrieve
 #' @export
 retrieve_journal <- function(id, credentials) {
   path <- paste0("api/v1/", id, "/")
