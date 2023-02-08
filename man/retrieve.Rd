@@ -6,6 +6,11 @@
 \usage{
 retrieve(path, credentials)
 }
+\arguments{
+\item{path}{The path to the API endpoint, excluding the hub URL (and not starting with a forward slash).}
+
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 Retrieve
 }

@@ -308,6 +308,8 @@ form_create <- function(path, body, credentials) {
 
 #' Retrieve
 #'
+#' @inheritParams post
+#'
 #' @export
 retrieve <- function(path, credentials) {
   response <- hublot::get(path, NULL, credentials)
