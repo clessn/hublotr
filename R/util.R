@@ -321,6 +321,7 @@ retrieve <- function(path, credentials) {
 
 #' Update
 #'
+#' @inheritParams patch
 #' @export
 update <- function(path, body, credentials) {
   response <- hublot::patch(path, body, credentials)
