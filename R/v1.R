@@ -189,6 +189,7 @@ retrieve_lake_item <- function(id, credentials) {
 }
 #' Add lake item
 #'
+#' @inheritParams form_create
 #' @export
 add_lake_item <- function(body, credentials) {
   path <- "api/v1/lake/"

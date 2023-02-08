@@ -6,6 +6,11 @@
 \usage{
 add_lake_item(body, credentials)
 }
+\arguments{
+\item{body}{The body of the request as json data (use `jsonlite::toJSON(body, auto_unbox=T)`).}
+
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 Add lake item
 }
