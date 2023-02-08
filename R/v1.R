@@ -253,6 +253,8 @@ remove_tag <- function(id, credentials) {
 # files
 
 #' List files
+#'
+#' @inheritParams list_
 #' @export
 list_files <- function(credentials) {
   path <- "api/v1/files/"
