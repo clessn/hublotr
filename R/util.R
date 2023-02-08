@@ -414,6 +414,7 @@ handle_response <- function(response, path, expected) {
 #' Check if package version is up to date
 #'
 #' @param warn_only Logical. TRUE to only return warning if the package version is not up to date. FALSE (default) to return a message confirming package is up to date.
+#' @returns Warning message when the package version is not up to date.
 #' @importFrom readr read_lines
 #' @importFrom stringr str_split
 #' @export
