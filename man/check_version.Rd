@@ -2,7 +2,7 @@
 % Please edit documentation in R/util.R
 \name{check_version}
 \alias{check_version}
-\title{Check if package version is up to date}
+\title{Check if the package is up to date}
 \usage{
 check_version(warn_only = FALSE)
 }
@@ -13,5 +13,5 @@ check_version(warn_only = FALSE)
 Warning message when the package version is not up to date.
 }
 \description{
-Check if package version is up to date
+Check if the package is the latest version available on GitHub.
 }
