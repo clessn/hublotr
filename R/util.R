@@ -338,6 +338,9 @@ remove <- function(path, credentials) {
 #' Filter dynamic table objects
 #'
 #' Only applies to dynamic table objects.
+#'
+#' @inheritParams post
+#' @inheritParams list_paginated
 #' @export
 filter <- function(path, body, credentials, cursor = NULL) {
   orig_path <- path
