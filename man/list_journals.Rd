@@ -6,6 +6,9 @@
 \usage{
 list_journals(credentials)
 }
+\arguments{
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 List journals
 }

@@ -43,6 +43,7 @@ retrieve_log <- function(id, credentials) {
 }
 #' List journals
 #'
+#' @inheritParams list_
 #' @export
 list_journals <- function(credentials) {
   path <- "api/v1/journals/"
