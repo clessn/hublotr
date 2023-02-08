@@ -261,6 +261,8 @@ list_files <- function(credentials) {
   return(hublot::list_(path, credentials))
 }
 #' Filter files
+#'
+#' @inheritParams filter
 #' @export
 filter_files <- function(credentials, filter) {
   path <- "api/v1/files/"
