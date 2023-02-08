@@ -278,6 +278,7 @@ list_next <- function(last_result, credentials) {
 
 #' List previous results
 #'
+#' @inheritParams list_next
 #' @export
 list_previous <- function(last_result, credentials) {
   if (!is.null(last_result$"previous")) {
