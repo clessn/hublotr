@@ -6,6 +6,9 @@
 \usage{
 remove_lake_item(id, credentials)
 }
+\arguments{
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 Remove lake item
 }

@@ -204,6 +204,7 @@ update_lake_item <- function(id, body, credentials) {
 }
 #' Remove lake item
 #'
+#' @inheritParams remove
 #' @export
 remove_lake_item <- function(id, credentials) {
   path <- paste0("api/v1/lake/", id, "/")
