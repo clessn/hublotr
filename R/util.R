@@ -331,6 +331,7 @@ update <- function(path, body, credentials) {
 
 #' Remove
 #'
+#' @inheritParams delete
 #' @export
 remove <- function(path, credentials) {
   response <- hublot::delete(path, credentials)
