@@ -173,6 +173,7 @@ list_lake_items <- function(credentials) {
 }
 #' Filter lake items
 #'
+#' @inheritParams filter
 #' @export
 filter_lake_items <- function(credentials, filter) {
   path <- "api/v1/lake/"
