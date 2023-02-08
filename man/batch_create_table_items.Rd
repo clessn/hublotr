@@ -8,6 +8,8 @@ batch_create_table_items(table_name, body, credentials)
 }
 \arguments{
 \item{body}{List of json elements.}
+
+\item{credentials}{A credentials object to authenticate with.}
 }
 \description{
 Batch create table items

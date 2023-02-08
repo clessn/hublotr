@@ -140,6 +140,7 @@ remove_table_item <- function(table_name, id, credentials) {
 #' Batch create table items
 #'
 #' @param body List of json elements.
+#' @inheritParams post
 #' @export
 batch_create_table_items <- function(table_name, body, credentials) {
   path <- paste0("api/v1/", table_name, "/batch_create/")
@@ -151,6 +152,7 @@ batch_create_table_items <- function(table_name, body, credentials) {
 #' Batch delete table items
 #'
 #' @param body List of ids (not keys).
+#' @inheritParams post
 #' @export
 batch_delete_table_items <- function(table_name, body, credentials) {
   path <- paste0("api/v1/", table_name, "/batch_delete/")
