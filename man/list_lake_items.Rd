@@ -6,6 +6,9 @@
 \usage{
 list_lake_items(credentials)
 }
+\arguments{
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 List lake items
 }

@@ -165,6 +165,7 @@ batch_delete_table_items <- function(table_name, body, credentials) {
 
 #' List lake items
 #'
+#' @inheritParams list_
 #' @export
 list_lake_items <- function(credentials) {
   path <- "api/v1/lake/"
