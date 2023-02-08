@@ -265,6 +265,8 @@ list_paginated <- function(path, credentials, cursor = NULL) {
 
 #' List next results
 #'
+#' @param last_result Last result.
+#' @param credentials A credentials object to authenticate with.
 #' @export
 list_next <- function(last_result, credentials) {
   if (!is.null(last_result$"next")) {

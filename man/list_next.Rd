@@ -6,6 +6,11 @@
 \usage{
 list_next(last_result, credentials)
 }
+\arguments{
+\item{last_result}{Last result.}
+
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 List next results
 }
