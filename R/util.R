@@ -362,6 +362,7 @@ filter <- function(path, body, credentials, cursor = NULL) {
 
 #' Filter next
 #'
+#' @inheritParams list_next
 #' @export
 filter_next <- function(last_result, credentials) {
   if (!is.null(last_result$"next")) {
