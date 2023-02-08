@@ -6,6 +6,9 @@
 \usage{
 retrieve_file(id, credentials)
 }
+\arguments{
+\item{credentials}{A credentials object to authenticate with.}
+}
 \description{
 Retrieve file
 }

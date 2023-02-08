@@ -270,6 +270,7 @@ filter_files <- function(credentials, filter) {
 }
 #' Retrieve file
 #'
+#' @inheritParams retrieve
 #' @export
 retrieve_file <- function(id, credentials) {
   path <- paste0("api/v1/files/", id, "/")
