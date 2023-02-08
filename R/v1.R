@@ -73,6 +73,8 @@ list_tables <- function(credentials) {
   return(hublot::list_(path, credentials))
 }
 #' Filter tables
+#'
+#' @inheritParams filter
 #' @export
 filter_tables <- function(credentials, filter) {
   path <- "api/v1/dynamic_tables/"
