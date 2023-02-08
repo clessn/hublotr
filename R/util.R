@@ -290,6 +290,7 @@ list_previous <- function(last_result, credentials) {
 
 #' Create
 #'
+#' @inheritParams post
 #' @export
 create <- function(path, body, credentials) {
   response <- hublot::post(path, body, credentials)
