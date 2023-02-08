@@ -130,6 +130,7 @@ update_table_item <- function(table_name, id, body, credentials) {
 }
 #' Remove table item
 #'
+#' @inheritParams remove
 #' @export
 remove_table_item <- function(table_name, id, credentials) {
   path <- paste0("api/v1/", table_name, "/", id, "/")
